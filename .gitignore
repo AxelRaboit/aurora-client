@@ -1,0 +1,13 @@
+/.env.local
+/.env.*.local
+/var/
+/vendor/
+/node_modules/
+/public/build/
+/public/bundles/
+/.vite/
+/public/uploads/
+/.cache
+
+.php-cs-fixer.cache
+.twig-cs-fixer.cache

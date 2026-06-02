@@ -1,0 +1,14 @@
+# Aurora core controllers
+aurora:
+    resource: '../vendor/axelraboit/aurora/src/'
+    type: attribute
+
+# Client controllers — flat, outside any module
+client:
+    resource: '../src/Controller/'
+    type: attribute
+
+# Client feature modules — controllers under src/Module/<Name>/Controller/
+modules:
+    resource: '../src/Module/'
+    type: attribute

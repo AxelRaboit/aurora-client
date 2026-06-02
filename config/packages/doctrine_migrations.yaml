@@ -1,0 +1,3 @@
+doctrine_migrations:
+    migrations_paths:
+        'ClientMigrations': '%kernel.project_dir%/migrations'

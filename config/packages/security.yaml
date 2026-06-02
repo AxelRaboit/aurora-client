@@ -1,0 +1,94 @@
+security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
+        ROLE_DEV: [ROLE_ADMIN]
+
+    providers:
+        app_user_provider:
+            entity:
+                class: Aurora\Module\Platform\User\Entity\User
+                property: email
+        admin_user_provider:
+            id: Aurora\Module\Platform\Auth\Security\Backend\UserProvider
+        front_user_provider:
+            id: Aurora\Module\Platform\Auth\Security\Frontend\UserProvider
+
+    firewalls:
+        dev:
+            pattern: ^/(_profiler|_wdt|assets|build)/
+            security: false
+
+        # ── Admin / CMS backend ───────────────────────────────────────────────
+        admin:
+            context: admin
+            pattern: ^/(backend|dev)
+            provider: admin_user_provider
+            user_checker: Aurora\Module\Platform\Auth\Security\Backend\UserChecker
+            form_login:
+                login_path: backend_login
+                check_path: backend_login
+                enable_csrf: true
+                default_target_path: backend_dashboard
+                username_parameter: email
+                password_parameter: password
+            login_throttling:
+                max_attempts: 5
+                interval: '15 minutes'
+            logout:
+                path: backend_logout
+                target: backend_login
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+            switch_user: { role: ROLE_ADMIN }
+
+        # ── Front / Public users ──────────────────────────────────────────────
+        main:
+            context: front
+            lazy: true
+            provider: front_user_provider
+            user_checker: Aurora\Module\Platform\Auth\Security\Frontend\UserChecker
+            custom_authenticators:
+                - Aurora\Module\Platform\Auth\Security\Frontend\LoginAuthenticator
+            entry_point: Aurora\Module\Platform\Auth\Security\Frontend\AuthEntryPoint
+            login_throttling:
+                max_attempts: 5
+                interval: '15 minutes'
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 2592000
+
+    access_control:
+        - { path: ^/stripe/webhook, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/login, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/register, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/forgot-password, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/reset-password, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/access-request, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/invitation, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/verify-email, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/resend-verification, roles: PUBLIC_ACCESS }
+        - { path: ^/front-login-check, roles: PUBLIC_ACCESS }
+        - { path: '^/[a-z]{2}/impersonate/', roles: PUBLIC_ACCESS }
+        - { path: '^/[a-z]{2}/forgot-password', roles: PUBLIC_ACCESS }
+        - { path: '^/[a-z]{2}/reset-password', roles: PUBLIC_ACCESS }
+        - { path: '^/[a-z]{2}/register', roles: PUBLIC_ACCESS }
+        - { path: '^/[a-z]{2}/resend-verification', roles: PUBLIC_ACCESS }
+        - { path: '^/[a-z]{2}/verify-email', roles: PUBLIC_ACCESS }
+        - { path: ^/backend, roles: ROLE_USER }
+        - { path: ^/dev, roles: ROLE_DEV }
+        - { path: '^/[a-z]{2}/account', roles: ROLE_USER }
+        - { path: ^/, roles: PUBLIC_ACCESS }
+
+when@test:
+    security:
+        password_hashers:
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4
+                time_cost: 3
+                memory_cost: 10

@@ -1,0 +1,36 @@
+parameters:
+    app.admin_email: '%env(ADMIN_EMAIL)%'
+    app.mailer_from: '%env(MAILER_FROM)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Mirror aurora-core's `_instanceof` autoconfig. `_instanceof` scopes to the
+    # current YAML file only — it does NOT inherit across bundle service configs.
+    # Without this block, client modules implementing aurora-core marker
+    # interfaces would never be picked up by the corresponding registries.
+    _instanceof:
+        Aurora\Core\Module\Contract\ModuleInterface:
+            tags: [aurora.module]
+        Aurora\Core\Frontend\Contract\FrontendInterface:
+            tags: [aurora.front]
+        Aurora\Module\Configuration\Setting\Provider\ApplicationParameterProviderInterface:
+            tags: [aurora.application_parameter_provider]
+        Aurora\Module\Configuration\Setting\Configuration\ConfigurationTabProviderInterface:
+            tags: [aurora.configuration_tab_provider]
+
+    # All client code lives under src/Module/<Module>/ (mirrors aurora-core structure).
+    # Aurora extensions (Entity / Dto / Manager / Serializer) go in the module that
+    # owns them, e.g. src/Module/Core/Agency/ for an Agency extension.
+    # Use #[AsAlias(<Interface>)] to replace an Aurora default service.
+    App\Module\:
+        resource: '../src/Module/'
+
+    Aurora\Module\Configuration\Setting\Command\DumpJsTranslationsCommand:
+        arguments:
+            $auroraDir: '%kernel.project_dir%/vendor/axelraboit/aurora'
+            # Add client module translation dirs here so their JS translations
+            # get dumped, e.g. '%kernel.project_dir%/src/Module/<X>/translations'
+            $extraSourceDirs: []

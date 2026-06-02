@@ -1,0 +1,15 @@
+{
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 -c \"\nimport json, sys\ntry:\n    core = open('.claude/memory/aurora-core/MEMORY.md').read()\n    client = open('.claude/memory/aurora-client/MEMORY.md').read()\n    context = '## Conventions aurora-core (lire avant d\\'agir)\\n\\n' + core + '\\n\\n---\\n\\n## Conventions aurora-client (lire avant d\\'agir)\\n\\n' + client\n    print(json.dumps({'hookSpecificOutput': {'hookEventName': 'UserPromptSubmit', 'additionalContext': context}}))\nexcept Exception as e:\n    sys.stderr.write(str(e))\n\"",
+                        "statusMessage": "Chargement des conventions aurora-core + aurora-client…"
+                    }
+                ]
+            }
+        ]
+    }
+}

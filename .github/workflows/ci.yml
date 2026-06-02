@@ -1,0 +1,202 @@
+name: CI
+
+on:
+  # Direct pushes only on long-lived branches; feature branches are tested
+  # via their pull_request event so we don't run the same commit twice.
+  push:
+    branches: [master, develop]
+  pull_request:
+
+# A second push on the same ref cancels the previous in-flight run instead
+# of queueing a duplicate.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  symfony:
+    name: Symfony ${{ matrix.symfony-version }} | PHP ${{ matrix.php-version }} | Node ${{ matrix.node-version }} | PNPM ${{ matrix.pnpm-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        symfony-version: [ 7.4 ]
+        php-version: [ 8.4 ]
+        node-version: [ 24 ]
+        pnpm-version: [ 10 ]
+    env:
+      extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, dom, filter, json, tokenizer
+      APP_ENV: test
+      APP_SECRET: ci_secret_not_used_in_prod
+      # Dummy 32-byte base64 keys for CI runs only (generated via
+      # `php -r "echo base64_encode(random_bytes(32));"`). No production
+      # data is exposed — the CI database is dropped + recreated each run.
+      AURORA_MOUNT_POINT_KEY: 5MfMH2+7ngPYxvDGrMQLgdT55Usw3W+asWjICfhl//g=
+      AURORA_ENCRYPTION_KEY: mm5PI515AWOnVgBdWgt9+/qhpTEnUoflQNyhhC+7Dww=
+      DATABASE_URL: postgresql://app:!ChangeMe!@127.0.0.1:5432/aurora_client?serverVersion=18&charset=utf8
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: "!ChangeMe!"
+          POSTGRES_DB: aurora_client
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      # —— Setup GitHub actions 🐙 ———————————————————————————————————————————————————
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # —— PHP & Composer 🧙‍️ —————————————————————————————————————————————————————————
+      - name: Setup PHP, extensions & composer with shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2
+          extensions: ${{ env.extensions }}
+          ini-values: post_max_size=256M, max_execution_time=180
+        env:
+          update: true
+
+      - name: Check PHP Version
+        run: php -v
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache PHP dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install PHP dependencies
+        run: composer install --no-ansi --no-interaction --prefer-dist --no-scripts
+
+      - name: Check if any dependencies are compromised
+        run: composer audit || true
+
+      # aurora-core ships its own composer.json and bundles its dev tools
+      # under its own vendor/. Composer's --no-scripts above only installed
+      # the client's vendor; we still need to populate vendor/axelraboit/aurora/vendor/
+      # so the bundled deps (e.g. symfony/ux-vue, referenced as a file: path
+      # in aurora-core's package.json) and the tool binaries (php-cs-fixer,
+      # twig-cs-fixer, rector, phpstan) are actually on disk.
+      - name: Install aurora-core's own vendor + QA tools
+        run: |
+          AURORA=vendor/axelraboit/aurora
+          composer install --working-dir=$AURORA --no-ansi --no-interaction --no-scripts
+          (cd $AURORA/tools/php-cs-fixer && composer install --no-ansi --no-interaction && chmod +x vendor/bin/*)
+          (cd $AURORA/tools/twig-cs-fixer && composer install --no-ansi --no-interaction && chmod +x vendor/bin/*)
+          (cd $AURORA/tools/rector && composer install --no-ansi --no-interaction && chmod +x vendor/bin/*)
+          (cd $AURORA/tools/phpstan && composer install --no-ansi --no-interaction && chmod +x vendor/bin/*)
+
+      # —— PNPM & Vite 🟨 ————————————————————————————————————————————————————————————
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        run: npm install -g pnpm@${{ matrix.pnpm-version }}
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # The client's package.json holds shared runtime Vue deps (vue,
+      # vue-i18n, axios, lucide-vue-next, …). The aurora vendor has the
+      # build tooling (vite, vitest, vue plugin, …). Vite resolves both
+      # via Node's walk-up module resolution.
+      - name: Install JS dependencies (aurora vendor)
+        working-directory: vendor/axelraboit/aurora
+        run: pnpm install --frozen-lockfile
+
+      - name: Install JS dependencies (client)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build assets
+        run: make build
+
+      # —— Coding standards ✨ ——————————————————————————————————————————————————————
+      - name: PHP CS Fixer
+        run: make lint-php
+
+      - name: Lint Twig
+        run: make lint-twig
+
+      - name: Create cache directories
+        run: mkdir -p var/cache/rector var/cache/phpstan
+
+      - name: Rector Cache
+        uses: actions/cache@v4
+        with:
+          path: var/cache/rector
+          key: ${{ runner.os }}-rector-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-rector-
+
+      - name: Rector
+        run: make rector
+
+      - name: Lint JavaScript
+        run: make lint-js
+
+      # —— Static analysis ✨ —————————————————————————————————————————————————
+      - name: PHPStan Cache
+        uses: actions/cache@v4
+        with:
+          path: var/cache/phpstan
+          key: phpstan-${{ runner.os }}-${{ hashFiles('vendor/axelraboit/aurora/tools/phpstan/phpstan.neon') }}
+          restore-keys: phpstan-${{ runner.os }}-
+
+      - name: PHPStan
+        run: make stan
+
+      # —— Test database 🗄️ ——————————————————————————————————————————————————
+      # Multi-namespace migrations (ClientMigrations + DoctrineMigrations from
+      # the aurora-core vendor) don't reliably interleave by version on a
+      # fresh DB — Doctrine processes namespace by namespace. The robust
+      # path for fresh dev/CI databases is `schema:create` from the entity
+      # metadata then mark every migration as already-applied. Future
+      # migrations (single namespace addition at a time) then run normally
+      # via `migrations:migrate`.
+      - name: Create test database
+        run: php bin/console doctrine:database:create --env=test --if-not-exists
+
+      - name: Create schema from entity metadata
+        run: php bin/console doctrine:schema:create --env=test
+
+      - name: Initialize migration metadata + mark all applied
+        run: |
+          php bin/console doctrine:migrations:sync-metadata-storage --env=test --no-interaction
+          php bin/console doctrine:migrations:version --add --all --no-interaction --env=test
+
+      - name: Validate schema is in sync with entity mappings
+        run: php bin/console doctrine:schema:validate --env=test
+
+      # —— Tests 🧪 —————————————————————————————————————————————————————————————
+      - name: Run frontend tests
+        run: make test-frontend
+
+      - name: Run backend unit tests
+        run: make test-backend-unit

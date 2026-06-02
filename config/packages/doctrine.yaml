@@ -1,0 +1,42 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        profiling_collect_backtrace: '%kernel.debug%'
+        # messenger_messages: owned by Symfony Messenger Doctrine transport, not by ORM.
+        # Without this filter, schema:validate keeps emitting "DROP TABLE messenger_messages".
+        schema_filter: ~^(?!messenger_messages$).*~
+    orm:
+        # Map an Aurora entity interface to a client concrete here when you
+        # substitute an entity, e.g.:
+        #   resolve_target_entities:
+        #       Aurora\Module\<X>\Entity\<X>Interface: App\Module\<X>\Entity\<X>
+        mappings:
+            AuroraClient:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Module'
+                prefix: 'App\Module'
+                alias: AuroraClient
+
+when@test:
+    doctrine:
+        dbal:
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+    doctrine:
+        orm:
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

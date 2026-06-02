@@ -1,0 +1,1 @@
+vendor/axelraboit/aurora/.claude/client_template/CLAUDE.md

@@ -1,0 +1,44 @@
+{
+    "name": "axelraboit/aurora-myspace",
+    "description": "MySpace — Aurora-based client application",
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.4",
+        "symfony/runtime": "7.4.*",
+        "axelraboit/aurora": "dev-develop"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^4.3.1",
+        "phpunit/phpunit": "^13.1.7",
+        "symfony/browser-kit": "7.4.*",
+        "symfony/css-selector": "7.4.*",
+        "symfony/maker-bundle": "^1.67",
+        "symfony/web-profiler-bundle": "7.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:AxelRaboit/aurora-core.git"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
+    },
+    "extra": {
+        "symfony": {
+            "require": "7.4.*"
+        }
+    }
+}
