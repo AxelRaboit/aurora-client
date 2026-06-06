@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-core.git",
-                "reference": "914b31bc5d082b7d62baeb4e053dae43669b599a"
+                "reference": "f235311badbe9e270654db3553d4f423c3da7545"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/914b31bc5d082b7d62baeb4e053dae43669b599a",
-                "reference": "914b31bc5d082b7d62baeb4e053dae43669b599a",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/f235311badbe9e270654db3553d4f423c3da7545",
+                "reference": "f235311badbe9e270654db3553d4f423c3da7545",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 }
             ],
             "description": "Aurora application",
-            "time": "2026-06-06T17:04:38+00:00"
+            "time": "2026-06-06T18:04:12+00:00"
         },
         {
             "name": "axelraboit/aurora-assistant",
@@ -319,12 +319,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-hr.git",
-                "reference": "dc12b7bc4e39c8e90644f35faca6d05bc8c84c9f"
+                "reference": "0d7cbd910b53c72ab9eb43c91818a8c73b5fb6c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-hr/zipball/dc12b7bc4e39c8e90644f35faca6d05bc8c84c9f",
-                "reference": "dc12b7bc4e39c8e90644f35faca6d05bc8c84c9f",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-hr/zipball/0d7cbd910b53c72ab9eb43c91818a8c73b5fb6c2",
+                "reference": "0d7cbd910b53c72ab9eb43c91818a8c73b5fb6c2",
                 "shasum": ""
             },
             "require": {
@@ -347,7 +347,7 @@
                 "proprietary"
             ],
             "description": "HR module for the Aurora platform.",
-            "time": "2026-05-30T19:35:18+00:00"
+            "time": "2026-06-06T18:01:36+00:00"
         },
         {
             "name": "axelraboit/aurora-notes",
@@ -355,12 +355,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-notes.git",
-                "reference": "36344bf713a7811b02fa4152cd6c2519e615ca5f"
+                "reference": "5e004977f5c9e6d7107beb5633f9791a1e21a59e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-notes/zipball/36344bf713a7811b02fa4152cd6c2519e615ca5f",
-                "reference": "36344bf713a7811b02fa4152cd6c2519e615ca5f",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-notes/zipball/5e004977f5c9e6d7107beb5633f9791a1e21a59e",
+                "reference": "5e004977f5c9e6d7107beb5633f9791a1e21a59e",
                 "shasum": ""
             },
             "require": {
@@ -383,7 +383,7 @@
                 "proprietary"
             ],
             "description": "Notes module for the Aurora platform.",
-            "time": "2026-05-30T19:35:18+00:00"
+            "time": "2026-06-06T18:01:36+00:00"
         },
         {
             "name": "axelraboit/aurora-personal-finance",
@@ -463,12 +463,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-planning.git",
-                "reference": "828d91876bbd6830dfbb5db356a908e3080343f0"
+                "reference": "632ff719e94b696e4a44f63ccec29289f5c51afa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-planning/zipball/828d91876bbd6830dfbb5db356a908e3080343f0",
-                "reference": "828d91876bbd6830dfbb5db356a908e3080343f0",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-planning/zipball/632ff719e94b696e4a44f63ccec29289f5c51afa",
+                "reference": "632ff719e94b696e4a44f63ccec29289f5c51afa",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +491,7 @@
                 "proprietary"
             ],
             "description": "Planning module for the Aurora platform.",
-            "time": "2026-05-30T19:35:18+00:00"
+            "time": "2026-06-06T18:01:36+00:00"
         },
         {
             "name": "axelraboit/aurora-project",
