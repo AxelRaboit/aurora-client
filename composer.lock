@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-core.git",
-                "reference": "f235311badbe9e270654db3553d4f423c3da7545"
+                "reference": "d44270ae49ae6f8625d51b3583ee7c6b1c197e74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/f235311badbe9e270654db3553d4f423c3da7545",
-                "reference": "f235311badbe9e270654db3553d4f423c3da7545",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/d44270ae49ae6f8625d51b3583ee7c6b1c197e74",
+                "reference": "d44270ae49ae6f8625d51b3583ee7c6b1c197e74",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 }
             ],
             "description": "Aurora application",
-            "time": "2026-06-06T18:04:12+00:00"
+            "time": "2026-06-06T19:15:30+00:00"
         },
         {
             "name": "axelraboit/aurora-assistant",
@@ -168,12 +168,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-billing.git",
-                "reference": "d93a52eccb8d77076e7d1b1626a8621bd59cd323"
+                "reference": "78261a359b2489382e429cca1caef303a297d490"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-billing/zipball/d93a52eccb8d77076e7d1b1626a8621bd59cd323",
-                "reference": "d93a52eccb8d77076e7d1b1626a8621bd59cd323",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-billing/zipball/78261a359b2489382e429cca1caef303a297d490",
+                "reference": "78261a359b2489382e429cca1caef303a297d490",
                 "shasum": ""
             },
             "require": {
@@ -196,7 +196,7 @@
                 "proprietary"
             ],
             "description": "Billing module for the Aurora platform.",
-            "time": "2026-05-30T20:52:48+00:00"
+            "time": "2026-06-06T19:12:59+00:00"
         },
         {
             "name": "axelraboit/aurora-commerce",
@@ -204,12 +204,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-commerce.git",
-                "reference": "1823063328799357de5074a98bc39bc2758623ac"
+                "reference": "649eb53f11ea7e424b0b9f26c8b5c713914b3e8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-commerce/zipball/1823063328799357de5074a98bc39bc2758623ac",
-                "reference": "1823063328799357de5074a98bc39bc2758623ac",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-commerce/zipball/649eb53f11ea7e424b0b9f26c8b5c713914b3e8b",
+                "reference": "649eb53f11ea7e424b0b9f26c8b5c713914b3e8b",
                 "shasum": ""
             },
             "require": {
@@ -239,7 +239,7 @@
                 "proprietary"
             ],
             "description": "Commerce (Ecommerce + Erp) module for the Aurora platform.",
-            "time": "2026-05-30T21:14:28+00:00"
+            "time": "2026-06-06T19:13:51+00:00"
         },
         {
             "name": "axelraboit/aurora-crm",
@@ -247,12 +247,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-crm.git",
-                "reference": "0a9b50499cd4143b36302de0bf1934e33ae23e6f"
+                "reference": "c922d56c23e37e2f8c8a60822f7b7e40d75bb9dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-crm/zipball/0a9b50499cd4143b36302de0bf1934e33ae23e6f",
-                "reference": "0a9b50499cd4143b36302de0bf1934e33ae23e6f",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-crm/zipball/c922d56c23e37e2f8c8a60822f7b7e40d75bb9dc",
+                "reference": "c922d56c23e37e2f8c8a60822f7b7e40d75bb9dc",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +275,7 @@
                 "proprietary"
             ],
             "description": "CRM module for the Aurora platform.",
-            "time": "2026-05-30T19:35:18+00:00"
+            "time": "2026-06-06T19:12:59+00:00"
         },
         {
             "name": "axelraboit/aurora-editorial",
@@ -283,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-editorial.git",
-                "reference": "ea2e6936763afcdd39f047908d3a40c127f4dc8d"
+                "reference": "86df5e3349cdcf0ae3e5589ad16274a54087caef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/ea2e6936763afcdd39f047908d3a40c127f4dc8d",
-                "reference": "ea2e6936763afcdd39f047908d3a40c127f4dc8d",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/86df5e3349cdcf0ae3e5589ad16274a54087caef",
+                "reference": "86df5e3349cdcf0ae3e5589ad16274a54087caef",
                 "shasum": ""
             },
             "require": {
@@ -311,7 +311,7 @@
                 "proprietary"
             ],
             "description": "Editorial (CMS) module for the Aurora platform.",
-            "time": "2026-05-30T20:52:48+00:00"
+            "time": "2026-06-06T19:12:59+00:00"
         },
         {
             "name": "axelraboit/aurora-hr",
@@ -391,12 +391,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-personal-finance.git",
-                "reference": "12c85ed26aa938dba2b738a20cbba65ceb33487d"
+                "reference": "4d9fdb43597f286b30c01bfcca1d75d5eb991887"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-personal-finance/zipball/12c85ed26aa938dba2b738a20cbba65ceb33487d",
-                "reference": "12c85ed26aa938dba2b738a20cbba65ceb33487d",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-personal-finance/zipball/4d9fdb43597f286b30c01bfcca1d75d5eb991887",
+                "reference": "4d9fdb43597f286b30c01bfcca1d75d5eb991887",
                 "shasum": ""
             },
             "require": {
@@ -419,7 +419,7 @@
                 "proprietary"
             ],
             "description": "Personal Finance module for the Aurora platform.",
-            "time": "2026-05-30T20:52:48+00:00"
+            "time": "2026-06-06T19:12:59+00:00"
         },
         {
             "name": "axelraboit/aurora-photo",
@@ -427,12 +427,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-photo.git",
-                "reference": "2e7ae49de792ce8d1fa4d111b85aadfe1526c6e5"
+                "reference": "8a2326a7f22d51ac1ae3fbe0461e5aca9fc6d54e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-photo/zipball/2e7ae49de792ce8d1fa4d111b85aadfe1526c6e5",
-                "reference": "2e7ae49de792ce8d1fa4d111b85aadfe1526c6e5",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-photo/zipball/8a2326a7f22d51ac1ae3fbe0461e5aca9fc6d54e",
+                "reference": "8a2326a7f22d51ac1ae3fbe0461e5aca9fc6d54e",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +455,7 @@
                 "proprietary"
             ],
             "description": "Photo (galleries) module for the Aurora platform.",
-            "time": "2026-05-30T19:48:30+00:00"
+            "time": "2026-06-06T19:12:59+00:00"
         },
         {
             "name": "axelraboit/aurora-planning",
@@ -499,12 +499,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-project.git",
-                "reference": "325e158e02df8ab2df9c6c09740d3599bd14cea2"
+                "reference": "c189e13b46adba3b841337b128e0a13dc30f9fa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-project/zipball/325e158e02df8ab2df9c6c09740d3599bd14cea2",
-                "reference": "325e158e02df8ab2df9c6c09740d3599bd14cea2",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-project/zipball/c189e13b46adba3b841337b128e0a13dc30f9fa2",
+                "reference": "c189e13b46adba3b841337b128e0a13dc30f9fa2",
                 "shasum": ""
             },
             "require": {
@@ -527,7 +527,7 @@
                 "proprietary"
             ],
             "description": "Project module for the Aurora platform.",
-            "time": "2026-05-30T19:35:18+00:00"
+            "time": "2026-06-06T19:12:59+00:00"
         },
         {
             "name": "axelraboit/aurora-tools",
