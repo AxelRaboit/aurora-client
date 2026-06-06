@@ -28,8 +28,8 @@ security:
             provider: admin_user_provider
             user_checker: Aurora\Module\Platform\Auth\Security\Backend\UserChecker
             form_login:
-                login_path: backend_login
-                check_path: backend_login
+                login_path: backend_platform_login
+                check_path: backend_platform_login
                 enable_csrf: true
                 default_target_path: backend_dashboard
                 username_parameter: email
@@ -38,8 +38,8 @@ security:
                 max_attempts: 5
                 interval: '15 minutes'
             logout:
-                path: backend_logout
-                target: backend_login
+                path: backend_platform_logout
+                target: backend_platform_login
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
@@ -63,15 +63,15 @@ security:
 
     access_control:
         - { path: ^/stripe/webhook, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/login, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/logout, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/register, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/forgot-password, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/reset-password, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/access-request, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/invitation, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/verify-email, roles: PUBLIC_ACCESS }
-        - { path: ^/backend/resend-verification, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/login, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/register, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/forgot-password, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/reset-password, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/access-request, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/invitation, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/verify-email, roles: PUBLIC_ACCESS }
+        - { path: ^/backend/platform/resend-verification, roles: PUBLIC_ACCESS }
         - { path: ^/front-login-check, roles: PUBLIC_ACCESS }
         - { path: '^/[a-z]{2}/impersonate/', roles: PUBLIC_ACCESS }
         - { path: '^/[a-z]{2}/forgot-password', roles: PUBLIC_ACCESS }
