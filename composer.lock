@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-core.git",
-                "reference": "ad8c9db4dfd60bf68c69b5ac7b4372ed4d120567"
+                "reference": "fbe33edb8c018bfaab2539990a8b0bedb019e856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/ad8c9db4dfd60bf68c69b5ac7b4372ed4d120567",
-                "reference": "ad8c9db4dfd60bf68c69b5ac7b4372ed4d120567",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/fbe33edb8c018bfaab2539990a8b0bedb019e856",
+                "reference": "fbe33edb8c018bfaab2539990a8b0bedb019e856",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 }
             ],
             "description": "Aurora application",
-            "time": "2026-06-06T19:45:24+00:00"
+            "time": "2026-06-06T20:21:18+00:00"
         },
         {
             "name": "axelraboit/aurora-assistant",
