@@ -283,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-editorial.git",
-                "reference": "3a5db1c6ee5f0ee02b41cbe96973d9968ccf61e5"
+                "reference": "ea0e55fd968669dbb32e9dcbd01e12900c99b5aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/3a5db1c6ee5f0ee02b41cbe96973d9968ccf61e5",
-                "reference": "3a5db1c6ee5f0ee02b41cbe96973d9968ccf61e5",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/ea0e55fd968669dbb32e9dcbd01e12900c99b5aa",
+                "reference": "ea0e55fd968669dbb32e9dcbd01e12900c99b5aa",
                 "shasum": ""
             },
             "require": {
@@ -311,7 +311,7 @@
                 "proprietary"
             ],
             "description": "Editorial (CMS) module for the Aurora platform.",
-            "time": "2026-06-06T19:39:40+00:00"
+            "time": "2026-06-06T19:58:45+00:00"
         },
         {
             "name": "axelraboit/aurora-hr",
