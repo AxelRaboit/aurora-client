@@ -13,29 +13,11 @@
             "@client/*": [
                 "./assets/client/*"
             ],
-            "@assistant/*": [
-                "./vendor/axelraboit/aurora/src/Module/Assistant/assets/*"
-            ],
-            "@billing/*": [
-                "./vendor/axelraboit/aurora/src/Module/Billing/assets/*"
-            ],
             "@configuration/*": [
                 "./vendor/axelraboit/aurora/src/Module/Configuration/assets/*"
             ],
-            "@crm/*": [
-                "./vendor/axelraboit/aurora/src/Module/Crm/assets/*"
-            ],
             "@dev/*": [
                 "./vendor/axelraboit/aurora/src/Module/Dev/assets/*"
-            ],
-            "@ecommerce/*": [
-                "./vendor/axelraboit/aurora/src/Module/Ecommerce/assets/*"
-            ],
-            "@editorial/*": [
-                "./vendor/axelraboit/aurora/src/Module/Editorial/assets/*"
-            ],
-            "@erp/*": [
-                "./vendor/axelraboit/aurora/src/Module/Erp/assets/*"
             ],
             "@ged/*": [
                 "./vendor/axelraboit/aurora/src/Module/Ged/assets/*"
@@ -43,35 +25,8 @@
             "@general/*": [
                 "./vendor/axelraboit/aurora/src/Module/General/assets/*"
             ],
-            "@hr/*": [
-                "./vendor/axelraboit/aurora/src/Module/Hr/assets/*"
-            ],
-            "@media/*": [
-                "./vendor/axelraboit/aurora/src/Module/Media/assets/*"
-            ],
-            "@notes/*": [
-                "./vendor/axelraboit/aurora/src/Module/Notes/assets/*"
-            ],
-            "@passwordgenerator/*": [
-                "./vendor/axelraboit/aurora/src/Module/PasswordGenerator/assets/*"
-            ],
-            "@personalfinance/*": [
-                "./vendor/axelraboit/aurora/src/Module/PersonalFinance/assets/*"
-            ],
-            "@photo/*": [
-                "./vendor/axelraboit/aurora/src/Module/Photo/assets/*"
-            ],
-            "@planning/*": [
-                "./vendor/axelraboit/aurora/src/Module/Planning/assets/*"
-            ],
             "@platform/*": [
                 "./vendor/axelraboit/aurora/src/Module/Platform/assets/*"
-            ],
-            "@project/*": [
-                "./vendor/axelraboit/aurora/src/Module/Project/assets/*"
-            ],
-            "@vault/*": [
-                "./vendor/axelraboit/aurora/src/Module/Vault/assets/*"
             ]
         }
     },
