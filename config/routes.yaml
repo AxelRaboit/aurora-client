@@ -3,6 +3,12 @@ aurora:
     resource: '../vendor/axelraboit/aurora/src/'
     type: attribute
 
+# Auto-discover controllers of every installed aurora-* module package.
+# One entry, whatever the number of installed modules.
+aurora_modules:
+    resource: .
+    type: aurora_modules
+
 # Client controllers — flat, outside any module
 client:
     resource: '../src/Controller/'

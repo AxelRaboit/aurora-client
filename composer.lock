@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0bb5474344343a8cdcedae1f2ae681cf",
+    "content-hash": "1496e4113cee221b17aea8a2bc520f8c",
     "packages": [
         {
             "name": "axelraboit/aurora",
-            "version": "dev-develop",
+            "version": "dev-split/core",
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-core.git",
-                "reference": "c266a2b9060bd8157ed91994d1cdbac7d5caf70b"
+                "reference": "914b31bc5d082b7d62baeb4e053dae43669b599a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/c266a2b9060bd8157ed91994d1cdbac7d5caf70b",
-                "reference": "c266a2b9060bd8157ed91994d1cdbac7d5caf70b",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/914b31bc5d082b7d62baeb4e053dae43669b599a",
+                "reference": "914b31bc5d082b7d62baeb4e053dae43669b599a",
                 "shasum": ""
             },
             "require": {
@@ -49,6 +49,7 @@
                 "symfony/property-access": "7.4.*",
                 "symfony/property-info": "7.4.*",
                 "symfony/rate-limiter": "7.4.*",
+                "symfony/resend-mailer": "7.4.*",
                 "symfony/runtime": "7.4.*",
                 "symfony/scheduler": "7.4.*",
                 "symfony/security-bundle": "7.4.*",
@@ -84,7 +85,6 @@
                 "symfony/maker-bundle": "^1.67",
                 "symfony/web-profiler-bundle": "7.4.*"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "symfony": {
@@ -124,7 +124,446 @@
                 }
             ],
             "description": "Aurora application",
-            "time": "2026-05-25T20:43:23+00:00"
+            "time": "2026-06-06T17:04:38+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-assistant",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-assistant.git",
+                "reference": "e777c85735688c61f415f2e33068f050c596bdae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-assistant/zipball/e777c85735688c61f415f2e33068f050c596bdae",
+                "reference": "e777c85735688c61f415f2e33068f050c596bdae",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Assistant\\AuroraAssistantBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Assistant\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Assistant (LLM) module for the Aurora platform.",
+            "time": "2026-05-30T20:58:53+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-billing",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-billing.git",
+                "reference": "d93a52eccb8d77076e7d1b1626a8621bd59cd323"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-billing/zipball/d93a52eccb8d77076e7d1b1626a8621bd59cd323",
+                "reference": "d93a52eccb8d77076e7d1b1626a8621bd59cd323",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Billing\\AuroraBillingBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Billing\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Billing module for the Aurora platform.",
+            "time": "2026-05-30T20:52:48+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-commerce",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-commerce.git",
+                "reference": "1823063328799357de5074a98bc39bc2758623ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-commerce/zipball/1823063328799357de5074a98bc39bc2758623ac",
+                "reference": "1823063328799357de5074a98bc39bc2758623ac",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Ecommerce\\AuroraEcommerceBundle"
+                },
+                "aurora": {
+                    "bundles": [
+                        "Aurora\\Module\\Ecommerce\\AuroraEcommerceBundle",
+                        "Aurora\\Module\\Erp\\AuroraErpBundle"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Ecommerce\\": "Ecommerce/",
+                    "Aurora\\Module\\Erp\\": "Erp/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Commerce (Ecommerce + Erp) module for the Aurora platform.",
+            "time": "2026-05-30T21:14:28+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-crm",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-crm.git",
+                "reference": "0a9b50499cd4143b36302de0bf1934e33ae23e6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-crm/zipball/0a9b50499cd4143b36302de0bf1934e33ae23e6f",
+                "reference": "0a9b50499cd4143b36302de0bf1934e33ae23e6f",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Crm\\AuroraCrmBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Crm\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "CRM module for the Aurora platform.",
+            "time": "2026-05-30T19:35:18+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-editorial",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-editorial.git",
+                "reference": "ea2e6936763afcdd39f047908d3a40c127f4dc8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/ea2e6936763afcdd39f047908d3a40c127f4dc8d",
+                "reference": "ea2e6936763afcdd39f047908d3a40c127f4dc8d",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Editorial\\AuroraEditorialBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Editorial\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Editorial (CMS) module for the Aurora platform.",
+            "time": "2026-05-30T20:52:48+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-hr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-hr.git",
+                "reference": "dc12b7bc4e39c8e90644f35faca6d05bc8c84c9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-hr/zipball/dc12b7bc4e39c8e90644f35faca6d05bc8c84c9f",
+                "reference": "dc12b7bc4e39c8e90644f35faca6d05bc8c84c9f",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Hr\\AuroraHrBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Hr\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "HR module for the Aurora platform.",
+            "time": "2026-05-30T19:35:18+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-notes",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-notes.git",
+                "reference": "36344bf713a7811b02fa4152cd6c2519e615ca5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-notes/zipball/36344bf713a7811b02fa4152cd6c2519e615ca5f",
+                "reference": "36344bf713a7811b02fa4152cd6c2519e615ca5f",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Notes\\AuroraNotesBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Notes\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Notes module for the Aurora platform.",
+            "time": "2026-05-30T19:35:18+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-personal-finance",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-personal-finance.git",
+                "reference": "12c85ed26aa938dba2b738a20cbba65ceb33487d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-personal-finance/zipball/12c85ed26aa938dba2b738a20cbba65ceb33487d",
+                "reference": "12c85ed26aa938dba2b738a20cbba65ceb33487d",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\PersonalFinance\\AuroraPersonalFinanceBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\PersonalFinance\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Personal Finance module for the Aurora platform.",
+            "time": "2026-05-30T20:52:48+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-photo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-photo.git",
+                "reference": "2e7ae49de792ce8d1fa4d111b85aadfe1526c6e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-photo/zipball/2e7ae49de792ce8d1fa4d111b85aadfe1526c6e5",
+                "reference": "2e7ae49de792ce8d1fa4d111b85aadfe1526c6e5",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Photo\\AuroraPhotoBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Photo\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Photo (galleries) module for the Aurora platform.",
+            "time": "2026-05-30T19:48:30+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-planning",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-planning.git",
+                "reference": "828d91876bbd6830dfbb5db356a908e3080343f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-planning/zipball/828d91876bbd6830dfbb5db356a908e3080343f0",
+                "reference": "828d91876bbd6830dfbb5db356a908e3080343f0",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Planning\\AuroraPlanningBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Planning\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Planning module for the Aurora platform.",
+            "time": "2026-05-30T19:35:18+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-project",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-project.git",
+                "reference": "325e158e02df8ab2df9c6c09740d3599bd14cea2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-project/zipball/325e158e02df8ab2df9c6c09740d3599bd14cea2",
+                "reference": "325e158e02df8ab2df9c6c09740d3599bd14cea2",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Project\\AuroraProjectBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Project\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Project module for the Aurora platform.",
+            "time": "2026-05-30T19:35:18+00:00"
+        },
+        {
+            "name": "axelraboit/aurora-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AxelRaboit/aurora-tools.git",
+                "reference": "c3348bb4f509f60820a4ef035551d4838b3b98e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-tools/zipball/c3348bb4f509f60820a4ef035551d4838b3b98e6",
+                "reference": "c3348bb4f509f60820a4ef035551d4838b3b98e6",
+                "shasum": ""
+            },
+            "require": {
+                "axelraboit/aurora": "@dev",
+                "php": ">=8.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "bundle": "Aurora\\Module\\Tools\\AuroraToolsBundle"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\Module\\Tools\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Tools module (Vault, PasswordGenerator) for the Aurora platform.",
+            "time": "2026-05-30T18:52:51+00:00"
         },
         {
             "name": "brick/math",
@@ -6563,6 +7002,80 @@
             "time": "2026-05-23T16:05:06+00:00"
         },
         {
+            "name": "symfony/resend-mailer",
+            "version": "v7.4.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/resend-mailer.git",
+                "reference": "eb7f4d83128eef12fcceccf33e5b4b89f2e2474f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/resend-mailer/zipball/eb7f4d83128eef12fcceccf33e5b4b89f2e2474f",
+                "reference": "eb7f4d83128eef12fcceccf33e5b4b89f2e2474f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/mailer": "^7.2|^8.0"
+            },
+            "conflict": {
+                "symfony/http-foundation": "<7.1"
+            },
+            "require-dev": {
+                "symfony/http-client": "^6.4|^7.0|^8.0",
+                "symfony/http-foundation": "^7.1|^8.0",
+                "symfony/webhook": "^6.4|^7.0|^8.0"
+            },
+            "type": "symfony-mailer-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mailer\\Bridge\\Resend\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Santostefano",
+                    "homepage": "https://github.com/welcoMattic"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Resend Mailer Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/resend-mailer/tree/v7.4.6"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-02-09T14:10:20+00:00"
+        },
+        {
             "name": "symfony/routing",
             "version": "v7.4.13",
             "source": {
@@ -11426,7 +11939,19 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "axelraboit/aurora": 20
+        "axelraboit/aurora": 20,
+        "axelraboit/aurora-assistant": 20,
+        "axelraboit/aurora-billing": 20,
+        "axelraboit/aurora-commerce": 20,
+        "axelraboit/aurora-crm": 20,
+        "axelraboit/aurora-editorial": 20,
+        "axelraboit/aurora-hr": 20,
+        "axelraboit/aurora-notes": 20,
+        "axelraboit/aurora-personal-finance": 20,
+        "axelraboit/aurora-photo": 20,
+        "axelraboit/aurora-planning": 20,
+        "axelraboit/aurora-project": 20,
+        "axelraboit/aurora-tools": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
