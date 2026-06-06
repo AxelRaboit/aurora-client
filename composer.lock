@@ -247,12 +247,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-crm.git",
-                "reference": "91e9919f69bc03aba92e9758e0b23c5337839f8b"
+                "reference": "415750089dddc1a1f5f6b8104b7d82718f292a0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-crm/zipball/91e9919f69bc03aba92e9758e0b23c5337839f8b",
-                "reference": "91e9919f69bc03aba92e9758e0b23c5337839f8b",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-crm/zipball/415750089dddc1a1f5f6b8104b7d82718f292a0c",
+                "reference": "415750089dddc1a1f5f6b8104b7d82718f292a0c",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +275,7 @@
                 "proprietary"
             ],
             "description": "CRM module for the Aurora platform.",
-            "time": "2026-06-06T19:39:40+00:00"
+            "time": "2026-06-06T20:28:53+00:00"
         },
         {
             "name": "axelraboit/aurora-editorial",
@@ -283,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-editorial.git",
-                "reference": "ea0e55fd968669dbb32e9dcbd01e12900c99b5aa"
+                "reference": "f0ec5067d6ce3a12a7459dc76fe802d1fa96e950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/ea0e55fd968669dbb32e9dcbd01e12900c99b5aa",
-                "reference": "ea0e55fd968669dbb32e9dcbd01e12900c99b5aa",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/f0ec5067d6ce3a12a7459dc76fe802d1fa96e950",
+                "reference": "f0ec5067d6ce3a12a7459dc76fe802d1fa96e950",
                 "shasum": ""
             },
             "require": {
@@ -311,7 +311,7 @@
                 "proprietary"
             ],
             "description": "Editorial (CMS) module for the Aurora platform.",
-            "time": "2026-06-06T19:58:45+00:00"
+            "time": "2026-06-06T20:28:53+00:00"
         },
         {
             "name": "axelraboit/aurora-hr",
@@ -391,12 +391,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-personal-finance.git",
-                "reference": "1011c01051dff4b8349deb251b5f6d6dc75d7b30"
+                "reference": "861f8ed8f547bfa9829cf2f0537e63e26bfcb013"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-personal-finance/zipball/1011c01051dff4b8349deb251b5f6d6dc75d7b30",
-                "reference": "1011c01051dff4b8349deb251b5f6d6dc75d7b30",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-personal-finance/zipball/861f8ed8f547bfa9829cf2f0537e63e26bfcb013",
+                "reference": "861f8ed8f547bfa9829cf2f0537e63e26bfcb013",
                 "shasum": ""
             },
             "require": {
@@ -419,7 +419,7 @@
                 "proprietary"
             ],
             "description": "Personal Finance module for the Aurora platform.",
-            "time": "2026-06-06T19:39:40+00:00"
+            "time": "2026-06-06T20:28:53+00:00"
         },
         {
             "name": "axelraboit/aurora-photo",
