@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-core.git",
-                "reference": "987915201b08e381ad0be3064cbf0142cf5fc4b2"
+                "reference": "93ba0f2031a110bd6c087c2d768e541abcead86c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/987915201b08e381ad0be3064cbf0142cf5fc4b2",
-                "reference": "987915201b08e381ad0be3064cbf0142cf5fc4b2",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/93ba0f2031a110bd6c087c2d768e541abcead86c",
+                "reference": "93ba0f2031a110bd6c087c2d768e541abcead86c",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "source": "https://github.com/AxelRaboit/aurora-core/tree/split/core",
                 "issues": "https://github.com/AxelRaboit/aurora-core/issues"
             },
-            "time": "2026-07-26T18:53:34+00:00"
+            "time": "2026-07-26T19:06:50+00:00"
         },
         {
             "name": "axelraboit/aurora-editorial",
@@ -133,12 +133,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-editorial.git",
-                "reference": "50af1759ca6d110f2280c7225b6304599cadba51"
+                "reference": "ea07e94b0651f2baa6fed386cea8b8d8e6149a5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/50af1759ca6d110f2280c7225b6304599cadba51",
-                "reference": "50af1759ca6d110f2280c7225b6304599cadba51",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/ea07e94b0651f2baa6fed386cea8b8d8e6149a5c",
+                "reference": "ea07e94b0651f2baa6fed386cea8b8d8e6149a5c",
                 "shasum": ""
             },
             "require": {
@@ -165,7 +165,7 @@
                 "source": "https://github.com/AxelRaboit/aurora-editorial/tree/master",
                 "issues": "https://github.com/AxelRaboit/aurora-editorial/issues"
             },
-            "time": "2026-07-26T18:53:24+00:00"
+            "time": "2026-07-26T19:06:31+00:00"
         },
         {
             "name": "brick/math",
