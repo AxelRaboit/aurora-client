@@ -23,7 +23,7 @@ services:
 
     # All client code lives under src/Module/<Module>/ (mirrors aurora-core structure).
     # Aurora extensions (Entity / Dto / Manager / Serializer) go in the module that
-    # owns them, e.g. src/Module/Core/Agency/ for an Agency extension.
+    # owns them, e.g. src/Module/Editorial/ for an Editorial extension.
     # Use #[AsAlias(<Interface>)] to replace an Aurora default service.
     App\Module\:
         resource: '../src/Module/'
