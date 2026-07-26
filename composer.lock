@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "031af007120f34642b4852f254b13c17",
+    "content-hash": "6f93de3931e54a41ded1e456b2708d6e",
     "packages": [
         {
             "name": "axelraboit/aurora",
-            "version": "dev-split/core",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-core.git",
-                "reference": "93ba0f2031a110bd6c087c2d768e541abcead86c"
+                "reference": "69eef5a234d4e6814387a0029c1cb1e25c1b52ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/93ba0f2031a110bd6c087c2d768e541abcead86c",
-                "reference": "93ba0f2031a110bd6c087c2d768e541abcead86c",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/69eef5a234d4e6814387a0029c1cb1e25c1b52ab",
+                "reference": "69eef5a234d4e6814387a0029c1cb1e25c1b52ab",
                 "shasum": ""
             },
             "require": {
@@ -82,6 +82,7 @@
                 "symfony/maker-bundle": "^1.67",
                 "symfony/web-profiler-bundle": "7.4.*"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "symfony": {
@@ -122,10 +123,10 @@
             ],
             "description": "Aurora application",
             "support": {
-                "source": "https://github.com/AxelRaboit/aurora-core/tree/split/core",
+                "source": "https://github.com/AxelRaboit/aurora-core/tree/develop",
                 "issues": "https://github.com/AxelRaboit/aurora-core/issues"
             },
-            "time": "2026-07-26T19:06:50+00:00"
+            "time": "2026-07-26T19:43:59+00:00"
         },
         {
             "name": "axelraboit/aurora-editorial",
