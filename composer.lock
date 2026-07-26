@@ -11,13 +11,13 @@
             "version": "dev-split/core",
             "source": {
                 "type": "git",
-                "url": "https://github.com/AxelRaboit/aurora-core.git",
-                "reference": "0c01df36be3d919892878c2ac33d24c7a77dd3a8"
+                "url": "git@github.com:AxelRaboit/aurora-core.git",
+                "reference": "8c4e7d90a139539cf1cf9b783d432f6dc629ec52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/0c01df36be3d919892878c2ac33d24c7a77dd3a8",
-                "reference": "0c01df36be3d919892878c2ac33d24c7a77dd3a8",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/8c4e7d90a139539cf1cf9b783d432f6dc629ec52",
+                "reference": "8c4e7d90a139539cf1cf9b783d432f6dc629ec52",
                 "shasum": ""
             },
             "require": {
@@ -121,11 +121,7 @@
                 }
             ],
             "description": "Aurora application",
-            "support": {
-                "source": "https://github.com/AxelRaboit/aurora-core/tree/split/core",
-                "issues": "https://github.com/AxelRaboit/aurora-core/issues"
-            },
-            "time": "2026-07-26T16:55:09+00:00"
+            "time": "2026-07-26T17:23:51+00:00"
         },
         {
             "name": "axelraboit/aurora-editorial",
