@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-core.git",
-                "reference": "cf7eca6c42ad81bd7285b6157da441a7f5b60ac2"
+                "reference": "e42f9c41056c2c49c4d2ce2d70cad0779cdd9632"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/cf7eca6c42ad81bd7285b6157da441a7f5b60ac2",
-                "reference": "cf7eca6c42ad81bd7285b6157da441a7f5b60ac2",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/e42f9c41056c2c49c4d2ce2d70cad0779cdd9632",
+                "reference": "e42f9c41056c2c49c4d2ce2d70cad0779cdd9632",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 }
             ],
             "description": "Aurora application",
-            "time": "2026-07-26T15:40:23+00:00"
+            "time": "2026-07-26T15:48:44+00:00"
         },
         {
             "name": "axelraboit/aurora-editorial",
