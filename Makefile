@@ -4,6 +4,10 @@ SHELL := /bin/bash
 AURORA        = vendor/axelraboit/aurora
 PHP_BIN       = php
 CONSOLE       = $(PHP_BIN) bin/console
+# aurora:menus:sync ships with the Editorial module; in an à-la-carte client
+# without Editorial the command is absent. Run it only when present so a
+# core-only setup doesn't break the bring-up / deploy sequences.
+SYNC_MENUS    = $(CONSOLE) list --raw 2>/dev/null | grep -q '^aurora:menus:sync' && $(CONSOLE) aurora:menus:sync || echo "  menus:sync skipped (Editorial module not installed)"
 COMPOSER      = composer
 PNPM          = pnpm
 PHP_CS_FIXER  = $(PHP_BIN) $(AURORA)/tools/php-cs-fixer/vendor/bin/php-cs-fixer
@@ -181,14 +185,14 @@ fixtures: _require-dev-env ## Drop DB, schema:create from entities, load fixture
 	$(CONSOLE) doctrine:migrations:version --add --all --no-interaction
 	$(CONSOLE) doctrine:fixtures:load --no-interaction
 	$(CONSOLE) aurora:application-parameter
-	$(CONSOLE) aurora:menus:sync
+	@$(SYNC_MENUS)
 	$(CONSOLE) aurora:privileges:sync
 	@echo "✅ Fixtures loaded"
 
 demo: _require-dev-env ## Load demo fixtures (DemoFixtures group) + run all syncs (DEV ONLY)
 	$(CONSOLE) doctrine:fixtures:load --group=demo --no-interaction
 	$(CONSOLE) aurora:application-parameter
-	$(CONSOLE) aurora:menus:sync
+	@$(SYNC_MENUS)
 	$(CONSOLE) aurora:privileges:sync
 	@echo "✅ Demo data loaded"
 
@@ -236,7 +240,7 @@ sync-params: ## Synchronise application parameters (creates missing, deletes obs
 	$(CONSOLE) aurora:application-parameter
 
 sync-menus: ## Create missing menus for registered locations (primary, footer, …)
-	$(CONSOLE) aurora:menus:sync
+	@$(SYNC_MENUS)
 
 sync-privileges: ## Purge obsolete privileges from users after module changes
 	$(CONSOLE) aurora:privileges:sync
@@ -325,13 +329,17 @@ ft: ## Fix code and run all tests
 	make fix && make test && make migrate-check
 
 # === Setup ===
-setup-env: ## Create .env.local from .env.local.example template
+setup-env: ## Create .env.local from .env.local.example template, with APP_SECRET + Aurora keys auto-generated
 	@if [ -f .env.local ]; then \
 		echo "⚠️  .env.local already exists. Overwrite? (yes/no)"; \
 		read -p "" confirm && [ "$$confirm" = "yes" ] || (echo "❌ Cancelled." && exit 1); \
 	fi
 	cp .env.local.example .env.local
-	@echo "✅ .env.local created from .env.local.example — edit it with your local values"
+	@php -r '$$c = file_get_contents(".env.local"); $$c = preg_replace("/^APP_SECRET=.*/m", "APP_SECRET=" . bin2hex(random_bytes(16)), $$c, 1); file_put_contents(".env.local", $$c);'
+	@php -r '$$c = file_get_contents(".env.local"); $$c = preg_replace("/^AURORA_MOUNT_POINT_KEY=.*/m", "AURORA_MOUNT_POINT_KEY=" . base64_encode(random_bytes(32)), $$c, 1); file_put_contents(".env.local", $$c);'
+	@php -r '$$c = file_get_contents(".env.local"); $$c = preg_replace("/^AURORA_ENCRYPTION_KEY=.*/m", "AURORA_ENCRYPTION_KEY=" . base64_encode(random_bytes(32)), $$c, 1); file_put_contents(".env.local", $$c);'
+	@echo "✅ .env.local created — APP_SECRET + Aurora keys generated automatically."
+	@echo "   Review DATABASE_URL before running 'make install-dev'."
 
 .PHONY: help
 help: ## Show this help message
@@ -367,7 +375,7 @@ install-dev: _require-dev-env ## Install for local development — full reset: d
 	$(CONSOLE) doctrine:fixtures:load --no-interaction
 	$(CONSOLE) aurora:application-parameter
 	$(CONSOLE) aurora:privileges:sync
-	$(CONSOLE) aurora:menus:sync
+	@$(SYNC_MENUS)
 	make dev
 	@echo "✅ Admin user: admin@aurora.app / password"
 
@@ -377,7 +385,7 @@ install-prod: ## Install for production
 	make setup-dirs
 	make migrate-f
 	$(CONSOLE) aurora:application-parameter
-	$(CONSOLE) aurora:menus:sync
+	@$(SYNC_MENUS)
 	make build
 	make cc-prod
 
@@ -393,7 +401,7 @@ deploy-prod: ## Deploy to production (requires a git tag on HEAD)
 	$(PNPM) --dir=$(AURORA) install --frozen-lockfile; \
 	$(CONSOLE) doctrine:migrations:migrate --no-interaction; \
 	$(CONSOLE) aurora:application-parameter; \
-	$(CONSOLE) aurora:menus:sync; \
+	$(SYNC_MENUS); \
 	$(PNPM) --dir=$(AURORA) run build; \
 	APP_ENV=prod APP_DEBUG=0 $(CONSOLE) cache:clear --env=prod; \
 	echo "✅ Deployed $$APP_VERSION"
