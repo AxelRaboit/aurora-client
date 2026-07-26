@@ -11,3 +11,6 @@
 
 .php-cs-fixer.cache
 .twig-cs-fixer.cache
+
+# macOS
+.DS_Store
