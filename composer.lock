@@ -129,13 +129,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:AxelRaboit/aurora-editorial.git",
-                "reference": "65eac84b43306d3e2773e8f2e727edb0c82dd9a6"
+                "url": "https://github.com/AxelRaboit/aurora-editorial.git",
+                "reference": "0118e4d3c84f65c45bdabdecfd206895f5c7792e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/65eac84b43306d3e2773e8f2e727edb0c82dd9a6",
-                "reference": "65eac84b43306d3e2773e8f2e727edb0c82dd9a6",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/0118e4d3c84f65c45bdabdecfd206895f5c7792e",
+                "reference": "0118e4d3c84f65c45bdabdecfd206895f5c7792e",
                 "shasum": ""
             },
             "require": {
@@ -158,7 +158,11 @@
                 "proprietary"
             ],
             "description": "Editorial (CMS) module for the Aurora platform.",
-            "time": "2026-08-01T21:13:08+00:00"
+            "support": {
+                "source": "https://github.com/AxelRaboit/aurora-editorial/tree/master",
+                "issues": "https://github.com/AxelRaboit/aurora-editorial/issues"
+            },
+            "time": "2026-08-01T21:19:45+00:00"
         },
         {
             "name": "brick/math",
