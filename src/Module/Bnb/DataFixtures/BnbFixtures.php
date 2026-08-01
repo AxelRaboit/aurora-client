@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace App\Module\Bnb\DataFixtures;
 
+use Aurora\Module\Configuration\Setting\Entity\Setting;
+use Aurora\Module\Configuration\Setting\Enum\ApplicationParameterEnum;
+use Aurora\Module\Editorial\Menu\Entity\Menu;
+use Aurora\Module\Editorial\Menu\Entity\MenuItem;
+use Aurora\Module\Editorial\Menu\Entity\MenuItemTranslation;
+use Aurora\Module\Editorial\Menu\Enum\MenuItemTargetTypeEnum;
+use Aurora\Module\Editorial\Menu\Enum\MenuItemVisibilityEnum;
 use Aurora\Module\Editorial\Post\Entity\Post;
 use Aurora\Module\Editorial\Post\Entity\PostTranslation;
 use Aurora\Module\Editorial\Post\Enum\PostStatusEnum;
@@ -24,10 +31,11 @@ use function assert;
  * Demo content for the guest house theme: a "Chambre" post type, the
  * taxonomies that describe a room, and half a dozen rooms to fill the site.
  *
- * Its own group (`bnb`) so it can be loaded next to the blog demo without
- * either replacing the other — `--group=bnb --append`. Aurora keeps one active
- * theme at a time, so the two demos coexist in the database and you switch by
- * activating a theme rather than reloading data.
+ * Configures the whole site, not just the rooms: pages, homepage and the two
+ * public menus. Aurora has one menu per location, so the blog demo and this one
+ * cannot honestly coexist — they are alternative configurations of the same
+ * site, and loading this one turns the site into a guest house. The blog demo
+ * is a `doctrine:fixtures:load --group=demo` away if you want it back.
  *
  * Rooms are modelled with the post type's custom fields rather than a bespoke
  * entity, which is the point of the demo: everything here is reachable from the
@@ -131,6 +139,54 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
         ],
     ];
 
+    /**
+     * The pages a guest house needs beyond its rooms. Kept short on purpose —
+     * the demo is about showing a real site shape, not writing a brochure.
+     *
+     * @var list<array{slug: string, fr: array{title: string, heading: string, body: string}, en: array{title: string, heading: string, body: string}}>
+     */
+    private const array PAGES = [
+        [
+            'slug' => 'accueil-mas',
+            'fr' => [
+                'title' => 'Accueil',
+                'heading' => 'Le Mas des Oliviers',
+                'body' => "Une maison d'hôtes de six chambres au cœur des collines, entre vignes et oliviers. Petit-déjeuner maison, piscine ouverte d'avril à octobre, et le silence pour seul voisin.",
+            ],
+            'en' => [
+                'title' => 'Home',
+                'heading' => 'Le Mas des Oliviers',
+                'body' => 'A six-room guest house in the hills, between vineyards and olive groves. Home-made breakfast, a pool open from April to October, and silence for a neighbour.',
+            ],
+        ],
+        [
+            'slug' => 'la-maison',
+            'fr' => [
+                'title' => 'La maison',
+                'heading' => 'Une bastide du XVIIIᵉ, restaurée avec patience',
+                'body' => 'Nous avons repris le mas en 2019 et passé trois ans à le remettre debout, pierre par pierre. Les chambres donnent sur le jardin ou sur la vallée. Le petit-déjeuner se prend sous la treille dès les beaux jours.',
+            ],
+            'en' => [
+                'title' => 'The house',
+                'heading' => 'An 18th-century farmhouse, patiently restored',
+                'body' => 'We took the place on in 2019 and spent three years putting it back together, stone by stone. Rooms look out over the garden or the valley. Breakfast is served under the arbour once the weather turns.',
+            ],
+        ],
+        [
+            'slug' => 'contact-mas',
+            'fr' => [
+                'title' => 'Nous contacter',
+                'heading' => 'Réserver ou poser une question',
+                'body' => 'Écrivez-nous pour vérifier nos disponibilités : nous répondons sous 24 heures. Le mas se trouve à 20 minutes de la gare, navette possible sur demande.',
+            ],
+            'en' => [
+                'title' => 'Contact us',
+                'heading' => 'Book, or ask us anything',
+                'body' => 'Write to us to check availability — we answer within 24 hours. The house is 20 minutes from the station, and we can arrange a pick-up.',
+            ],
+        ],
+    ];
+
     public function __construct(
         private readonly PostTextExtractor $textExtractor,
     ) {}
@@ -150,6 +206,12 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
         foreach (self::ROOMS as $room) {
             $this->room($manager, $roomType, $terms, $room);
         }
+
+        $manager->flush();
+
+        $pages = $this->pages($manager);
+        $this->homepage($manager, $pages);
+        $this->menus($manager, $roomType, $pages);
 
         $manager->flush();
     }
@@ -230,6 +292,143 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
         }
 
         return $terms;
+    }
+
+    /**
+     * The pages, created once and reused on a second run.
+     *
+     * @return array<string, Post> keyed by slug
+     */
+    private function pages(EntityManagerInterface $manager): array
+    {
+        $pageType = $manager->getRepository(PostType::class)->findOneBy(['slug' => 'page']);
+        $pages = [];
+
+        foreach (self::PAGES as $config) {
+            $existing = $manager->getRepository(PostTranslation::class)->findOneBy(['slug' => $config['slug'], 'locale' => 'fr']);
+
+            if (null !== $existing) {
+                $pages[$config['slug']] = $existing->getPost();
+
+                continue;
+            }
+
+            $page = new Post()->setPostType($pageType)->setStatus(PostStatusEnum::Published);
+            $manager->persist($page);
+
+            foreach (['fr', 'en'] as $locale) {
+                $translation = new PostTranslation()
+                    ->setPost($page)
+                    ->setLocale($locale)
+                    ->setTitle($config[$locale]['title'])
+                    ->setSlug($config['slug'])
+                    ->setMetaDescription($config[$locale]['body'])
+                    ->setBlocks([
+                        ['type' => 'heading', 'data' => ['text' => $config[$locale]['heading'], 'level' => 1]],
+                        ['type' => 'paragraph', 'data' => ['text' => $config[$locale]['body']]],
+                    ]);
+                $translation->setSearchContent($this->textExtractor->extract($translation));
+                $manager->persist($translation);
+            }
+
+            $pages[$config['slug']] = $page;
+        }
+
+        $manager->flush();
+
+        return $pages;
+    }
+
+    /**
+     * Points the site at the guest house landing page.
+     *
+     * Overwrites whatever homepage was set, unlike aurora:install which only
+     * seeds an untouched setting: this fixture exists to reconfigure the site,
+     * and leaving it pointing at the blog demo's page would be the mixing we
+     * are trying to avoid.
+     *
+     * @param array<string, Post> $pages
+     */
+    private function homepage(EntityManagerInterface $manager, array $pages): void
+    {
+        $home = $pages['accueil-mas'] ?? null;
+        if (!$home instanceof Post) {
+            return;
+        }
+
+        $setting = $manager->getRepository(Setting::class)->findOneBy(['key' => ApplicationParameterEnum::HomepagePostId->value]);
+
+        if (!$setting instanceof Setting) {
+            $setting = new Setting()
+                ->setKey(ApplicationParameterEnum::HomepagePostId->value)
+                ->setType(ApplicationParameterEnum::HomepagePostId->getType())
+                ->setGroup(ApplicationParameterEnum::HomepagePostId->getGroup());
+            $manager->persist($setting);
+        }
+
+        $setting->setValue((string) $home->getId());
+    }
+
+    /**
+     * Rebuilds the public menus for a guest house.
+     *
+     * Existing entries are cleared first — one menu per location means the blog
+     * demo's navigation would otherwise sit alongside ours. The `account` menu
+     * is left alone: its entries are protected by Aurora and belong to the
+     * platform rather than to either demo.
+     *
+     * @param array<string, Post> $pages
+     */
+    private function menus(EntityManagerInterface $manager, PostType $roomType, array $pages): void
+    {
+        $entries = [
+            'primary' => [
+                ['type' => MenuItemTargetTypeEnum::Home, 'fr' => 'Accueil', 'en' => 'Home'],
+                ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Nos chambres', 'en' => 'Our rooms'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']?->getId(), 'fr' => 'La maison', 'en' => 'The house'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact', 'en' => 'Contact'],
+            ],
+            'footer' => [
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']?->getId(), 'fr' => 'La maison', 'en' => 'The house'],
+                ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Nos chambres', 'en' => 'Our rooms'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact', 'en' => 'Contact'],
+            ],
+        ];
+
+        foreach ($entries as $location => $items) {
+            $menu = $manager->getRepository(Menu::class)->findOneBy(['location' => $location]);
+            if (!$menu instanceof Menu) {
+                continue;
+            }
+
+            foreach ($menu->getItems() as $existing) {
+                $manager->remove($existing);
+            }
+
+            $manager->flush();
+
+            foreach ($items as $position => $config) {
+                if (MenuItemTargetTypeEnum::Home !== $config['type'] && null === ($config['target'] ?? null)) {
+                    continue;
+                }
+
+                $item = new MenuItem()
+                    ->setMenu($menu)
+                    ->setTargetType($config['type'])
+                    ->setTargetId($config['target'] ?? null)
+                    ->setVisibility(MenuItemVisibilityEnum::Always)
+                    ->setPosition($position);
+                $manager->persist($item);
+
+                foreach (['fr', 'en'] as $locale) {
+                    $translation = new MenuItemTranslation()
+                        ->setMenuItem($item)
+                        ->setLocale($locale)
+                        ->setLabel($config[$locale]);
+                    $manager->persist($translation);
+                }
+            }
+        }
     }
 
     /**
