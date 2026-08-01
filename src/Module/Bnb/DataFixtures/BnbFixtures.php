@@ -20,6 +20,7 @@ use Aurora\Module\Editorial\PostType\Entity\PostTypeField;
 use Aurora\Module\Editorial\Taxonomy\Entity\Taxonomy;
 use Aurora\Module\Editorial\Taxonomy\Entity\TaxonomyTerm;
 use Aurora\Module\Ged\Document\Entity\Document;
+use Aurora\Module\Ged\Document\Service\DocumentUrlGenerator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -189,7 +190,20 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
 
     public function __construct(
         private readonly PostTextExtractor $textExtractor,
+        // Image URLs are date-based (ged/2026/08/…), so they are resolved from
+        // the documents at load time rather than written into the content —
+        // hardcoding them breaks the moment the media fixtures run in another
+        // month.
+        private readonly DocumentUrlGenerator $documentUrls,
     ) {}
+
+    /** Public URL of a demo image, by its original file name. */
+    private function imageUrl(EntityManagerInterface $manager, string $originalName): ?string
+    {
+        return $this->documentUrls->publicUrl(
+            $manager->getRepository(Document::class)->findOneBy(['originalName' => $originalName]),
+        );
+    }
 
     public static function getGroups(): array
     {
@@ -323,10 +337,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
                     ->setTitle($config[$locale]['title'])
                     ->setSlug($config['slug'])
                     ->setMetaDescription($config[$locale]['body'])
-                    ->setBlocks([
-                        ['type' => 'heading', 'data' => ['text' => $config[$locale]['heading'], 'level' => 1]],
-                        ['type' => 'paragraph', 'data' => ['text' => $config[$locale]['body']]],
-                    ]);
+                    ->setBlocks($this->pageBlocks($manager, $config, $locale));
                 $translation->setSearchContent($this->textExtractor->extract($translation));
                 $manager->persist($translation);
             }
@@ -337,6 +348,95 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
         $manager->flush();
 
         return $pages;
+    }
+
+    /**
+     * Composes a page's blocks.
+     *
+     * "La maison" gets the full treatment — images, a pull quote, a list, a
+     * callout — because a demo that is one heading and one paragraph shows
+     * nothing about what the editor can do. The other pages stay short: a
+     * contact page padded with filler would look like filler.
+     *
+     * @param array{slug: string, fr: array<string, string>, en: array<string, string>} $config
+     *
+     * @return list<array{type: string, data: array<string, mixed>}>
+     */
+    private function pageBlocks(EntityManagerInterface $manager, array $config, string $locale): array
+    {
+        $blocks = [
+            ['type' => 'heading', 'data' => ['text' => $config[$locale]['heading'], 'level' => 1]],
+            ['type' => 'paragraph', 'data' => ['text' => $config[$locale]['body']]],
+        ];
+
+        if ('la-maison' !== $config['slug']) {
+            return $blocks;
+        }
+
+        $landscape = $this->imageUrl($manager, 'landscape.jpg');
+        $portrait = $this->imageUrl($manager, 'portrait-team.jpg');
+        $isFrench = 'fr' === $locale;
+
+        if (null !== $landscape) {
+            $blocks[] = ['type' => 'image', 'data' => [
+                'file' => ['url' => $landscape],
+                'caption' => $isFrench ? 'La vallée depuis la terrasse, au petit matin.' : 'The valley from the terrace, early morning.',
+            ]];
+        }
+
+        $blocks[] = ['type' => 'heading', 'data' => [
+            'text' => $isFrench ? 'Les chambres' : 'The rooms',
+            'level' => 2,
+        ]];
+        $blocks[] = ['type' => 'paragraph', 'data' => [
+            'text' => $isFrench
+                ? "Six chambres, toutes différentes, réparties entre le corps de ferme et l'ancienne magnanerie. Aucune ne donne sur la route. Nous avons gardé les tomettes d'origine partout où elles tenaient encore, et refait les salles de bain à neuf."
+                : 'Six rooms, all different, spread between the farmhouse and the old silkworm shed. None of them faces the road. We kept the original floor tiles wherever they held, and rebuilt the bathrooms from scratch.',
+        ]];
+
+        $blocks[] = ['type' => 'list', 'data' => [
+            'style' => 'unordered',
+            'items' => $isFrench
+                ? ['Draps en lin lavé et linge de toilette fournis', 'Petit-déjeuner maison servi de 8h à 10h30', 'Piscine chauffée ouverte d\'avril à octobre', 'Parking clos dans la cour', 'Wi-Fi fibre dans toute la maison']
+                : ['Washed linen sheets and towels provided', 'Home-made breakfast served 8:00–10:30', 'Heated pool open April to October', 'Enclosed parking in the courtyard', 'Fibre Wi-Fi throughout the house'],
+        ]];
+
+        if (null !== $portrait) {
+            $blocks[] = ['type' => 'mediaText', 'data' => [
+                'image' => ['url' => $portrait],
+                'text' => $isFrench
+                    ? "<p><strong>Claire et Julien.</strong> Nous tenions un restaurant à Lyon avant de reprendre le mas. Julien cuisine, je m'occupe du jardin et des chambres. Nous vivons sur place à l'année, avec deux chiens qui vous accueilleront avant nous.</p>"
+                    : '<p><strong>Claire and Julien.</strong> We ran a restaurant in Lyon before taking the house on. Julien cooks, I look after the garden and the rooms. We live here all year, with two dogs who will greet you before we do.</p>',
+            ]];
+        }
+
+        $blocks[] = ['type' => 'quote', 'data' => [
+            'text' => $isFrench
+                ? "On est arrivés pour deux nuits, on est restés cinq. Le calme, la table, et cette impression d'être chez des amis plutôt qu'à l'hôtel."
+                : 'We came for two nights and stayed five. The quiet, the food, and the feeling of being at friends\' rather than at a hotel.',
+            'caption' => $isFrench ? 'Hélène et Marc, septembre' : 'Hélène and Marc, September',
+        ]];
+
+        $blocks[] = ['type' => 'delimiter', 'data' => []];
+
+        $blocks[] = ['type' => 'heading', 'data' => [
+            'text' => $isFrench ? 'Aux alentours' : 'Nearby',
+            'level' => 2,
+        ]];
+        $blocks[] = ['type' => 'paragraph', 'data' => [
+            'text' => $isFrench
+                ? "Le village est à dix minutes à pied, avec sa boulangerie et son marché du jeudi matin. Les gorges se rejoignent en vingt minutes de voiture, et l'abbaye romane vaut le détour à la lumière de fin d'après-midi."
+                : 'The village is ten minutes on foot, with a bakery and a Thursday morning market. The gorges are twenty minutes by car, and the Romanesque abbey is worth the trip in late-afternoon light.',
+        ]];
+
+        $blocks[] = ['type' => 'callout', 'data' => [
+            'type' => 'info',
+            'text' => $isFrench
+                ? "Nous n'acceptons pas les groupes ni les événements : la maison compte six chambres et nous tenons à ce qu'elle reste calme."
+                : 'We do not take groups or events: the house has six rooms and we would like it to stay quiet.',
+        ]];
+
+        return $blocks;
     }
 
     /**
