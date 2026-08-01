@@ -24,7 +24,9 @@
     </div>
 {% endif %}
 
-<article class="max-w-3xl mx-auto px-5 py-14">
+{# Reading width comes from the theme's own config, set in the backend, so an
+   editor can widen the column without touching this file. #}
+<article class="{{ themeContext.contentWidthClass() }} px-5 py-14">
     <h1 class="font-serif text-4xl">{{ translationData.title }}</h1>
 
     {% if isRoom %}
