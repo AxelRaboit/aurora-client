@@ -134,12 +134,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-editorial.git",
-                "reference": "0118e4d3c84f65c45bdabdecfd206895f5c7792e"
+                "reference": "7008ece6c5e7d2a1be0a5ca536f4306a2663efc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/0118e4d3c84f65c45bdabdecfd206895f5c7792e",
-                "reference": "0118e4d3c84f65c45bdabdecfd206895f5c7792e",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/7008ece6c5e7d2a1be0a5ca536f4306a2663efc7",
+                "reference": "7008ece6c5e7d2a1be0a5ca536f4306a2663efc7",
                 "shasum": ""
             },
             "require": {
@@ -166,7 +166,7 @@
                 "source": "https://github.com/AxelRaboit/aurora-editorial/tree/master",
                 "issues": "https://github.com/AxelRaboit/aurora-editorial/issues"
             },
-            "time": "2026-08-01T21:19:45+00:00"
+            "time": "2026-08-01T21:28:58+00:00"
         },
         {
             "name": "brick/math",
