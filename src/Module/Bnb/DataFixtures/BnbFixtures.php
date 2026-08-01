@@ -174,14 +174,53 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             ],
         ],
         [
+            'slug' => 'les-salons',
+            'fr' => [
+                'title' => 'Les salons',
+                'heading' => 'Deux salons, une cheminée, aucune télévision',
+                'body' => "Le grand salon ouvre sur la terrasse et sert de salle de petit-déjeuner les matins de pluie. Le petit salon, à l'étage, garde sa cheminée d'origine et une bibliothèque que nos hôtes alimentent depuis six ans.",
+            ],
+            'en' => [
+                'title' => 'The living rooms',
+                'heading' => 'Two sitting rooms, one fireplace, no television',
+                'body' => 'The main room opens onto the terrace and doubles as the breakfast room on rainy mornings. The upstairs room keeps its original fireplace and a library our guests have been feeding for six years.',
+            ],
+        ],
+        [
+            'slug' => 'les-exterieurs',
+            'fr' => [
+                'title' => 'Les extérieurs',
+                'heading' => "Un hectare de jardin, une piscine, et de l'ombre partout",
+                'body' => "La piscine est chauffée d'avril à octobre et jamais bondée : six chambres, ça fait rarement plus de dix personnes. Le potager fournit la table en été, et les transats sous les platanes sont le meilleur endroit de la maison à 17 heures.",
+            ],
+            'en' => [
+                'title' => 'The grounds',
+                'heading' => 'An acre of garden, a pool, and shade everywhere',
+                'body' => 'The pool is heated from April to October and never crowded — six rooms rarely means more than ten people. The kitchen garden feeds the table in summer, and the loungers under the plane trees are the best spot in the house at five in the afternoon.',
+            ],
+        ],
+        [
+            'slug' => 'infos-pratiques',
+            'fr' => [
+                'title' => 'Infos pratiques',
+                'heading' => "Tout ce qu'il faut savoir avant de venir",
+                'body' => 'Arrivée à partir de 16 heures, départ avant 11 heures. Nous acceptons les cartes et les virements, pas les chèques. Le mas est à 20 minutes de la gare et nous venons vous chercher sur demande.',
+            ],
+            'en' => [
+                'title' => 'Practical information',
+                'heading' => 'Everything worth knowing before you come',
+                'body' => 'Check-in from 4pm, check-out before 11am. We take cards and transfers, not cheques. The house is 20 minutes from the station and we will collect you on request.',
+            ],
+        ],
+        [
             'slug' => 'contact-mas',
             'fr' => [
-                'title' => 'Nous contacter',
+                'title' => 'Contact & réservations',
                 'heading' => 'Réserver ou poser une question',
                 'body' => 'Écrivez-nous pour vérifier nos disponibilités : nous répondons sous 24 heures. Le mas se trouve à 20 minutes de la gare, navette possible sur demande.',
             ],
             'en' => [
-                'title' => 'Contact us',
+                'title' => 'Contact & booking',
                 'heading' => 'Book, or ask us anything',
                 'body' => 'Write to us to check availability — we answer within 24 hours. The house is 20 minutes from the station, and we can arrange a pick-up.',
             ],
@@ -413,7 +452,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
         $blocks[] = ['type' => 'quote', 'data' => [
             'text' => $isFrench
                 ? "On est arrivés pour deux nuits, on est restés cinq. Le calme, la table, et cette impression d'être chez des amis plutôt qu'à l'hôtel."
-                : 'We came for two nights and stayed five. The quiet, the food, and the feeling of being at friends\' rather than at a hotel.',
+                : "We came for two nights and stayed five. The quiet, the food, and the feeling of being at friends' rather than at a hotel.",
             'caption' => $isFrench ? 'Hélène et Marc, septembre' : 'Hélène and Marc, September',
         ]];
 
@@ -481,17 +520,29 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
      */
     private function menus(EntityManagerInterface $manager, PostType $roomType, array $pages): void
     {
+        // "La maison" carries the two room-less spaces as children, which keeps
+        // the top level to five entries and exercises Aurora's dropdown — a flat
+        // list of seven would demo neither.
         $entries = [
             'primary' => [
                 ['type' => MenuItemTargetTypeEnum::Home, 'fr' => 'Accueil', 'en' => 'Home'],
-                ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Nos chambres', 'en' => 'Our rooms'],
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']?->getId(), 'fr' => 'La maison', 'en' => 'The house'],
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact', 'en' => 'Contact'],
+                ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Les chambres', 'en' => 'The rooms'],
+                [
+                    'type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']?->getId(),
+                    'fr' => 'La maison', 'en' => 'The house',
+                    'children' => [
+                        ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['les-salons']?->getId(), 'fr' => 'Les salons', 'en' => 'The living rooms'],
+                        ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['les-exterieurs']?->getId(), 'fr' => 'Les extérieurs', 'en' => 'The grounds'],
+                    ],
+                ],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['infos-pratiques']?->getId(), 'fr' => 'Infos pratiques', 'en' => 'Practical information'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact & réservations', 'en' => 'Contact & booking'],
             ],
             'footer' => [
                 ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']?->getId(), 'fr' => 'La maison', 'en' => 'The house'],
-                ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Nos chambres', 'en' => 'Our rooms'],
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact', 'en' => 'Contact'],
+                ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Les chambres', 'en' => 'The rooms'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['infos-pratiques']?->getId(), 'fr' => 'Infos pratiques', 'en' => 'Practical information'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact & réservations', 'en' => 'Contact & booking'],
             ],
         ];
 
@@ -508,27 +559,50 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             $manager->flush();
 
             foreach ($items as $position => $config) {
-                if (MenuItemTargetTypeEnum::Home !== $config['type'] && null === ($config['target'] ?? null)) {
-                    continue;
-                }
+                $item = $this->menuItem($manager, $menu, $config, $position, null);
 
-                $item = new MenuItem()
-                    ->setMenu($menu)
-                    ->setTargetType($config['type'])
-                    ->setTargetId($config['target'] ?? null)
-                    ->setVisibility(MenuItemVisibilityEnum::Always)
-                    ->setPosition($position);
-                $manager->persist($item);
-
-                foreach (['fr', 'en'] as $locale) {
-                    $translation = new MenuItemTranslation()
-                        ->setMenuItem($item)
-                        ->setLocale($locale)
-                        ->setLabel($config[$locale]);
-                    $manager->persist($translation);
+                foreach ($config['children'] ?? [] as $childPosition => $childConfig) {
+                    $this->menuItem($manager, $menu, $childConfig, $childPosition, $item);
                 }
             }
         }
+    }
+
+    /**
+     * Creates one entry, optionally nested under a parent.
+     *
+     * Returns null for an entry whose target could not be resolved — a page the
+     * fixture failed to create — rather than persisting one that points nowhere
+     * and gets dropped from the site anyway.
+     *
+     * @param array{type: MenuItemTargetTypeEnum, target?: int|null, fr: string, en: string} $config
+     */
+    private function menuItem(EntityManagerInterface $manager, Menu $menu, array $config, int $position, ?MenuItem $parent): ?MenuItem
+    {
+        if (MenuItemTargetTypeEnum::Home !== $config['type'] && null === ($config['target'] ?? null)) {
+            return null;
+        }
+
+        $item = new MenuItem()
+            ->setMenu($menu)
+            ->setTargetType($config['type'])
+            ->setTargetId($config['target'] ?? null)
+            ->setVisibility(MenuItemVisibilityEnum::Always)
+            ->setPosition($position);
+
+        if ($parent instanceof MenuItem) {
+            $item->setParent($parent);
+        }
+
+        $manager->persist($item);
+
+        foreach (['fr', 'en'] as $locale) {
+            $manager->persist(
+                new MenuItemTranslation()->setMenuItem($item)->setLocale($locale)->setLabel($config[$locale]),
+            );
+        }
+
+        return $item;
     }
 
     /**
