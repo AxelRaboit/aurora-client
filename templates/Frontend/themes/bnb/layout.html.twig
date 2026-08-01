@@ -1,12 +1,12 @@
 {# Guest house theme.
- 
+
    A client theme is selected by its slug: ThemeResolver only looks in
    <project>/templates/Frontend/themes/<slug>/ when the active slug is not
    "default", which is why this cannot simply override the default theme's
    files. Every page template in this folder extends this layout by name — the
    ones shipped by Editorial hard-code the default layout, so a page not
    overridden here keeps the default chrome.
- 
+
    Written in Twig rather than mounted as a Vue app: the markup is static, and
    Tailwind now scans this directory since the client-sources fix in
    aurora-core's Vite config. #}
