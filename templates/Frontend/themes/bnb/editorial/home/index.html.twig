@@ -1,0 +1,15 @@
+{# The homepage is a designated page, so Editorial renders it through the post
+   template above — this file only serves the fallback listing, kept plain on
+   purpose since a guest house should never land here. #}
+{% extends 'Frontend/themes/bnb/layout.html.twig' %}
+
+{% block seo_define %}{% do seo({}) %}{% endblock %}
+
+{% block body %}
+<section class="max-w-3xl mx-auto px-5 py-20">
+    <h1 class="font-serif text-4xl">{{ context.siteName }}</h1>
+    <p class="text-[#7a7266] mt-4">
+        Aucune page d'accueil n'est désignée dans les réglages : cette liste s'affiche à la place.
+    </p>
+</section>
+{% endblock %}

@@ -11,13 +11,13 @@
             "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "git@github.com:AxelRaboit/aurora-core.git",
-                "reference": "50f770bcc47e153555da8209b002f52bb16e67ea"
+                "url": "https://github.com/AxelRaboit/aurora-core.git",
+                "reference": "aef30fb23ae90c971f9112814563ccd06ca761dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/50f770bcc47e153555da8209b002f52bb16e67ea",
-                "reference": "50f770bcc47e153555da8209b002f52bb16e67ea",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/aef30fb23ae90c971f9112814563ccd06ca761dc",
+                "reference": "aef30fb23ae90c971f9112814563ccd06ca761dc",
                 "shasum": ""
             },
             "require": {
@@ -122,20 +122,24 @@
                 }
             ],
             "description": "Aurora application",
-            "time": "2026-08-01T21:52:58+00:00"
+            "support": {
+                "source": "https://github.com/AxelRaboit/aurora-core/tree/develop",
+                "issues": "https://github.com/AxelRaboit/aurora-core/issues"
+            },
+            "time": "2026-08-01T22:12:01+00:00"
         },
         {
             "name": "axelraboit/aurora-editorial",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:AxelRaboit/aurora-editorial.git",
-                "reference": "40d8ac1b3cb7d3ac00053979e8890a4dba70372c"
+                "url": "https://github.com/AxelRaboit/aurora-editorial.git",
+                "reference": "cb8504d4905dea2ddab6228ac5f87342be25d0ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/40d8ac1b3cb7d3ac00053979e8890a4dba70372c",
-                "reference": "40d8ac1b3cb7d3ac00053979e8890a4dba70372c",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/cb8504d4905dea2ddab6228ac5f87342be25d0ef",
+                "reference": "cb8504d4905dea2ddab6228ac5f87342be25d0ef",
                 "shasum": ""
             },
             "require": {
@@ -158,7 +162,11 @@
                 "proprietary"
             ],
             "description": "Editorial (CMS) module for the Aurora platform.",
-            "time": "2026-08-01T21:50:52+00:00"
+            "support": {
+                "source": "https://github.com/AxelRaboit/aurora-editorial/tree/master",
+                "issues": "https://github.com/AxelRaboit/aurora-editorial/issues"
+            },
+            "time": "2026-08-01T22:21:15+00:00"
         },
         {
             "name": "brick/math",

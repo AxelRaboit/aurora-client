@@ -1,0 +1,78 @@
+{# Guest house theme.
+ 
+   A client theme is selected by its slug: ThemeResolver only looks in
+   <project>/templates/Frontend/themes/<slug>/ when the active slug is not
+   "default", which is why this cannot simply override the default theme's
+   files. Every page template in this folder extends this layout by name — the
+   ones shipped by Editorial hard-code the default layout, so a page not
+   overridden here keeps the default chrome.
+ 
+   Written in Twig rather than mounted as a Vue app: the markup is static, and
+   Tailwind now scans this directory since the client-sources fix in
+   aurora-core's Vite config. #}
+<!DOCTYPE html>
+<html lang="{{ locale }}" data-theme>
+<head>
+    {% set alternates = alternates|default([]) %}
+    {% block seo_define %}{% do seo({}) %}{% endblock %}
+    <meta name="generator" content="Aurora by axelraboit">
+    {{ include('Frontend/themes/default/partials/head.html.twig') }}
+</head>
+<body class="min-h-screen bg-[#fbf9f6] text-[#2c2a26] flex flex-col antialiased">
+
+{% set primaryItems = menu_items('primary', locale) %}
+{% set footerItems = menu_items('footer', locale) %}
+
+<header class="sticky top-0 z-40 bg-[#fbf9f6]/90 backdrop-blur border-b border-[#e5ddd1]">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-6">
+        <a href="{{ default_front_home_path(locale) }}" class="font-serif text-lg tracking-tight hover:opacity-70 transition-opacity">
+            {{ context.siteName }}
+        </a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm">
+            {% for item in primaryItems %}
+                <div class="relative group">
+                    {% if item.url %}
+                        <a href="{{ item.url }}" class="hover:text-[#9a6f4a] transition-colors">{{ item.label }}</a>
+                    {% else %}
+                        <span class="cursor-default">{{ item.label }}</span>
+                    {% endif %}
+                    {% if item.children|length %}
+                        <div class="absolute left-0 top-full pt-3 min-w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                            <div class="bg-white border border-[#e5ddd1] rounded-lg shadow-lg py-2">
+                                {% for child in item.children %}
+                                    <a href="{{ child.url }}" class="block px-4 py-2 hover:bg-[#f4efe7] transition-colors">{{ child.label }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </nav>
+
+        <a href="{{ contactPath|default('#') }}" class="hidden sm:inline-flex items-center rounded-full bg-[#2c2a26] text-[#fbf9f6] text-sm px-5 py-2 hover:bg-[#9a6f4a] transition-colors">
+            Réserver
+        </a>
+    </div>
+</header>
+
+<main class="flex-1">
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="border-t border-[#e5ddd1] mt-24">
+    <div class="max-w-6xl mx-auto px-5 py-12 flex flex-col sm:flex-row justify-between gap-8 text-sm">
+        <div>
+            <p class="font-serif text-base">{{ context.siteName }}</p>
+            <p class="text-[#7a7266] mt-1">{{ themeContext.footerText(context.siteName) }}</p>
+        </div>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2">
+            {% for item in footerItems %}
+                <a href="{{ item.url }}" class="text-[#7a7266] hover:text-[#2c2a26] transition-colors">{{ item.label }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+</footer>
+
+</body>
+</html>
