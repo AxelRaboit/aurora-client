@@ -134,12 +134,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:AxelRaboit/aurora-editorial.git",
-                "reference": "dfc87957bff5b68c0a025b53f8f91d9e8c8745c4"
+                "reference": "95fecd30213a72abe8b530ca37862abcbc58e9fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/dfc87957bff5b68c0a025b53f8f91d9e8c8745c4",
-                "reference": "dfc87957bff5b68c0a025b53f8f91d9e8c8745c4",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/95fecd30213a72abe8b530ca37862abcbc58e9fc",
+                "reference": "95fecd30213a72abe8b530ca37862abcbc58e9fc",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +162,7 @@
                 "proprietary"
             ],
             "description": "Editorial (CMS) module for the Aurora platform.",
-            "time": "2026-08-01T19:47:29+00:00"
+            "time": "2026-08-01T19:56:52+00:00"
         },
         {
             "name": "brick/math",
