@@ -489,9 +489,11 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
                 : 'The village is ten minutes on foot, with a bakery and a Thursday morning market. The gorges are twenty minutes by car, and the Romanesque abbey is worth the trip in late-afternoon light.',
         ]];
 
+        // 'message', not 'text': the editor tool saves {type, title, message},
+        // and a callout written in the other shape opens blank in the backend.
         $blocks[] = ['type' => 'callout', 'data' => [
             'type' => 'info',
-            'text' => $isFrench
+            'message' => $isFrench
                 ? "Nous n'acceptons pas les groupes ni les événements : la maison compte six chambres et nous tenons à ce qu'elle reste calme."
                 : 'We do not take groups or events: the house has six rooms and we would like it to stay quiet.',
         ]];
