@@ -298,11 +298,9 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             // builds on, and the URL a visitor lands on from the menu.
             ->setHasArchive(true)
             ->setIsBuiltIn(false)
-            // Blocks are on so a room can carry an Introduction: the card
-            // teaser now comes from the content, not from the meta
-            // description, and a type with no block surface would have
-            // nothing to show in the listing.
-            ->setSupports(['blocks', 'thumbnail']);
+            // No block surface: a room is structured data plus a one-line
+            // description, and there is no body copy to write.
+            ->setSupports(['thumbnail']);
 
         $manager->persist($roomType);
 
@@ -389,15 +387,16 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
 
             foreach (['fr', 'en'] as $locale) {
                 // 'meta' is written for a search result and stays under the 160
-                // characters a snippet shows; 'body' is the standfirst a reader
-                // sees, and goes into an intro block. They used to be the same
-                // string, which produced 247-character "meta descriptions" —
-                // prose that Google would simply cut in half.
+                // characters a snippet shows; 'body' is the summary a reader
+                // sees, under the title and on the card. They used to be the
+                // same string, which produced 247-character "meta descriptions"
+                // — prose that Google would simply cut in half.
                 $translation = new PostTranslation()
                     ->setPost($page)
                     ->setLocale($locale)
                     ->setTitle($config[$locale]['title'])
                     ->setSlug($config['slug'])
+                    ->setDescription($config[$locale]['body'])
                     ->setMetaDescription($config[$locale]['meta'])
                     ->setBlocks($this->pageBlocks($manager, $config, $locale));
                 $translation->setSearchContent($this->textExtractor->extract($translation));
@@ -428,7 +427,6 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
     {
         $blocks = [
             ['type' => 'header', 'data' => ['text' => $config[$locale]['heading'], 'level' => 1]],
-            ['type' => 'intro', 'data' => ['text' => $config[$locale]['body']]],
         ];
 
         if ('la-maison' !== $config['slug']) {
@@ -675,11 +673,8 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
                 ->setLocale($locale)
                 ->setTitle($room[$locale]['title'])
                 ->setSlug($room['slug'])
+                ->setDescription($room[$locale]['teaser'])
                 ->setMetaDescription($room[$locale]['meta'])
-                // The teaser is the reader's text, so it becomes the
-                // Introduction block — which is also where the listing
-                // card now takes its excerpt from.
-                ->setBlocks([['type' => 'intro', 'data' => ['text' => $room[$locale]['teaser']]]])
                 // Values live on the translation, keyed by field name — the
                 // shape PostTypeField declares. Non-translatable fields are
                 // written to both locales so a reader in either language sees
