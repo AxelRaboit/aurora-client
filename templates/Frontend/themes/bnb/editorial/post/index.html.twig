@@ -56,10 +56,9 @@
         {% endif %}
     {% endif %}
 
-    {% if translationData.metaDescription %}
-        <p class="text-lg text-[#7a7266] mt-6">{{ translationData.metaDescription }}</p>
-    {% endif %}
-
+    {# The standfirst used to be printed here from the meta description. It is
+       an Introduction block now, so it arrives inside `content` — written for
+       the reader rather than for a search snippet. #}
     <div class="prose prose-neutral max-w-none mt-8">{{ content|raw }}</div>
 </article>
 {% endblock %}
