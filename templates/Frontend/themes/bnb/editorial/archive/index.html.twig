@@ -1,0 +1,72 @@
+{# Room listing. `posts` is the flat list of cards, with `total`, `page` and
+   `totalPages` alongside it — the same shape the search endpoint answers with,
+   so the first render and a filtered reload cannot drift apart.
+
+   Each card carries customFields and terms: without them a structured post
+   type has nothing to list but its headline. #}
+{% extends 'Frontend/themes/bnb/layout.html.twig' %}
+
+{% block seo_define %}{% do seo({title: postType.label}) %}{% endblock %}
+
+{% block body %}
+<section class="max-w-6xl mx-auto px-5 pt-14 pb-6">
+    <h1 class="font-serif text-4xl">{{ postType.label }}</h1>
+    <p class="text-[#7a7266] mt-3 max-w-2xl">
+        Six chambres, toutes différentes. Les tarifs s'entendent par nuit, petit-déjeuner compris.
+    </p>
+</section>
+
+<section class="max-w-6xl mx-auto px-5 pb-20">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+        {% for post in posts %}
+            {% set available = post.customFields.disponible|default(false) %}
+            {# Built here: the archive view passes no path template — the default
+               theme composes it inline too, for its Vue app's props. #}
+            {% set url = path('editorial_post', {locale: locale, postTypeSlug: post.postTypeSlug, slug: post.slug}) %}
+
+            <article class="group">
+                <a href="{{ url }}" class="block">
+                    <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#efe8dd]">
+                        {% if post.featuredMediaUrl %}
+                            <img src="{{ post.featuredMediaUrl }}" alt="{{ post.title }}"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 style="object-position: {{ post.featuredMediaFocalPosition }}" loading="lazy">
+                        {% endif %}
+                        {% if not available %}
+                            <span class="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-xs">
+                                Indisponible
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="mt-3 flex items-baseline justify-between gap-3">
+                        <h2 class="font-medium">{{ post.title }}</h2>
+                        {% if post.customFields.prix_nuit is defined %}
+                            <p class="shrink-0 text-sm"><span class="font-medium">{{ post.customFields.prix_nuit }} €</span><span class="text-[#7a7266]"> / nuit</span></p>
+                        {% endif %}
+                    </div>
+
+                    <p class="text-sm text-[#7a7266] mt-0.5">
+                        {{ post.customFields.capacite|default('?') }} personnes
+                        {%- if post.customFields.superficie is defined %} · {{ post.customFields.superficie }} m²{% endif %}
+                    </p>
+
+                    {% if post.description %}
+                        <p class="text-sm text-[#7a7266] mt-2 line-clamp-2">{{ post.description }}</p>
+                    {% endif %}
+
+                    {% if post.terms.equipement is defined %}
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            {% for amenity in post.terms.equipement|slice(0, 3) %}
+                                <span class="rounded-full border border-[#e5ddd1] px-2.5 py-0.5 text-xs text-[#7a7266]">{{ amenity }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </a>
+            </article>
+        {% else %}
+            <p class="text-[#7a7266]">Aucune chambre pour le moment.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
