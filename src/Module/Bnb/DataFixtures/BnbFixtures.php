@@ -89,48 +89,48 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
     private const array ROOMS = [
         [
             'slug' => 'chambre-glycine',
-            'fr' => ['title' => 'Chambre Glycine', 'teaser' => 'Une chambre lumineuse ouvrant sur la treille, idéale pour un séjour à deux.'],
-            'en' => ['title' => 'Wisteria Room', 'teaser' => 'A bright room opening onto the arbour, ideal for two.'],
+            'fr' => ['title' => 'Chambre Glycine', 'teaser' => 'Une chambre lumineuse ouvrant sur la treille, idéale pour un séjour à deux.', 'meta' => 'Chambre double lumineuse au Mas des Oliviers, ouverte sur la treille. Salle de bain privative, petit-déjeuner inclus.'],
+            'en' => ['title' => 'Wisteria Room', 'teaser' => 'A bright room opening onto the arbour, ideal for two.', 'meta' => 'Bright double room at Le Mas des Oliviers, opening onto the arbour. Private bathroom, breakfast included.'],
             'fields' => ['prix_nuit' => '95', 'capacite' => '2', 'superficie' => '18', 'type_lit' => 'double', 'disponible' => true],
             'amenities' => ['wifi', 'petit-dejeuner', 'salle-de-bain-privative', 'vue-jardin'],
             'media' => 1,
         ],
         [
             'slug' => 'suite-oliveraie',
-            'fr' => ['title' => "Suite de l'Oliveraie", 'teaser' => 'Notre plus grande suite, avec terrasse privée face aux oliviers.'],
-            'en' => ['title' => 'Olive Grove Suite', 'teaser' => 'Our largest suite, with a private terrace facing the olive trees.'],
+            'fr' => ['title' => "Suite de l'Oliveraie", 'teaser' => 'Notre plus grande suite, avec terrasse privée face aux oliviers.', 'meta' => 'Suite avec terrasse privée face aux oliviers, la plus grande du Mas des Oliviers. Vue jardin et accès piscine.'],
+            'en' => ['title' => 'Olive Grove Suite', 'teaser' => 'Our largest suite, with a private terrace facing the olive trees.', 'meta' => 'Suite with a private terrace facing the olive trees, the largest at Le Mas des Oliviers. Garden view and pool access.'],
             'fields' => ['prix_nuit' => '165', 'capacite' => '4', 'superficie' => '38', 'type_lit' => 'king', 'disponible' => true],
             'amenities' => ['wifi', 'petit-dejeuner', 'salle-de-bain-privative', 'climatisation', 'piscine', 'parking'],
             'media' => 2,
         ],
         [
             'slug' => 'chambre-lavande',
-            'fr' => ['title' => 'Chambre Lavande', 'teaser' => 'Calme et sobre, sous les combles, avec vue sur les collines.'],
-            'en' => ['title' => 'Lavender Room', 'teaser' => 'Quiet and understated, under the eaves, looking out over the hills.'],
+            'fr' => ['title' => 'Chambre Lavande', 'teaser' => 'Calme et sobre, sous les combles, avec vue sur les collines.', 'meta' => 'Chambre mansardée avec vue sur les collines, au calme sous les combles du Mas des Oliviers.'],
+            'en' => ['title' => 'Lavender Room', 'teaser' => 'Quiet and understated, under the eaves, looking out over the hills.', 'meta' => 'Attic room with a view over the hills, quiet under the eaves at Le Mas des Oliviers.'],
             'fields' => ['prix_nuit' => '85', 'capacite' => '2', 'superficie' => '15', 'type_lit' => 'twin', 'disponible' => true],
             'amenities' => ['wifi', 'petit-dejeuner', 'salle-de-bain-privative'],
             'media' => 3,
         ],
         [
             'slug' => 'chambre-familiale-figuier',
-            'fr' => ['title' => 'Chambre familiale Le Figuier', 'teaser' => 'Deux espaces communicants pour voyager avec les enfants.'],
-            'en' => ['title' => 'Fig Tree Family Room', 'teaser' => 'Two connecting spaces for travelling with children.'],
+            'fr' => ['title' => 'Chambre familiale Le Figuier', 'teaser' => 'Deux espaces communicants pour voyager avec les enfants.', 'meta' => 'Chambre familiale de deux espaces communicants, pour séjourner avec les enfants au Mas des Oliviers.'],
+            'en' => ['title' => 'Fig Tree Family Room', 'teaser' => 'Two connecting spaces for travelling with children.', 'meta' => 'Family room with two connecting spaces, for staying with children at Le Mas des Oliviers.'],
             'fields' => ['prix_nuit' => '140', 'capacite' => '5', 'superficie' => '32', 'type_lit' => 'familial', 'disponible' => true],
             'amenities' => ['wifi', 'petit-dejeuner', 'salle-de-bain-privative', 'parking', 'animaux'],
             'media' => 4,
         ],
         [
             'slug' => 'chambre-romarin',
-            'fr' => ['title' => 'Chambre Romarin', 'teaser' => 'Notre chambre la plus abordable, au rez-de-chaussée du mas.'],
-            'en' => ['title' => 'Rosemary Room', 'teaser' => 'Our most affordable room, on the ground floor of the farmhouse.'],
+            'fr' => ['title' => 'Chambre Romarin', 'teaser' => 'Notre chambre la plus abordable, au rez-de-chaussée du mas.', 'meta' => 'Chambre de plain-pied au rez-de-chaussée du mas, la plus abordable. Salle de bain privative et vue jardin.'],
+            'en' => ['title' => 'Rosemary Room', 'teaser' => 'Our most affordable room, on the ground floor of the farmhouse.', 'meta' => 'Ground-floor room at the farmhouse, our most affordable. Private bathroom and garden view.'],
             'fields' => ['prix_nuit' => '75', 'capacite' => '2', 'superficie' => '14', 'type_lit' => 'double', 'disponible' => true],
             'amenities' => ['wifi', 'petit-dejeuner', 'vue-jardin'],
             'media' => 1,
         ],
         [
             'slug' => 'suite-amandier',
-            'fr' => ['title' => "Suite de l'Amandier", 'teaser' => 'En rénovation jusqu\'au printemps — réouverture prévue en avril.'],
-            'en' => ['title' => 'Almond Tree Suite', 'teaser' => 'Under renovation until spring — reopening in April.'],
+            'fr' => ['title' => "Suite de l'Amandier", 'teaser' => 'En rénovation jusqu\'au printemps — réouverture prévue en avril.', 'meta' => "Suite en rénovation jusqu'au printemps, réouverture prévue en avril au Mas des Oliviers."],
+            'en' => ['title' => 'Almond Tree Suite', 'teaser' => 'Under renovation until spring — reopening in April.', 'meta' => 'Suite under renovation until spring, reopening in April at Le Mas des Oliviers.'],
             // Deliberately unavailable: the theme has to show what an
             // unbookable room looks like, and a demo where everything is
             // perfect never exercises that path.
@@ -296,7 +296,11 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             // builds on, and the URL a visitor lands on from the menu.
             ->setHasArchive(true)
             ->setIsBuiltIn(false)
-            ->setSupports(['thumbnail']);
+            // Blocks are on so a room can carry an Introduction: the card
+            // teaser now comes from the content, not from the meta
+            // description, and a type with no block surface would have
+            // nothing to show in the listing.
+            ->setSupports(['blocks', 'thumbnail']);
 
         $manager->persist($roomType);
 
@@ -667,11 +671,11 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
                 ->setLocale($locale)
                 ->setTitle($room[$locale]['title'])
                 ->setSlug($room['slug'])
-                ->setMetaDescription($room[$locale]['teaser'])
-                // No blocks: the room type declares only `thumbnail`, so the
-                // editor hides the block surface for it. Writing blocks that
-                // cannot be edited would be exactly the kind of data/UI
-                // mismatch this demo is meant to avoid.
+                ->setMetaDescription($room[$locale]['meta'])
+                // The teaser is the reader's text, so it becomes the
+                // Introduction block — which is also where the listing
+                // card now takes its excerpt from.
+                ->setBlocks([['type' => 'intro', 'data' => ['text' => $room[$locale]['teaser']]]])
                 // Values live on the translation, keyed by field name — the
                 // shape PostTypeField declares. Non-translatable fields are
                 // written to both locales so a reader in either language sees

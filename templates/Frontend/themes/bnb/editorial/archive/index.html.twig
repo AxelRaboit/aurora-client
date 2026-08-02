@@ -48,8 +48,8 @@
                         {%- if post.customFields.superficie is defined %} · {{ post.customFields.superficie }} m²{% endif %}
                     </p>
 
-                    {% if post.metaDescription %}
-                        <p class="text-sm text-[#7a7266] mt-2 line-clamp-2">{{ post.metaDescription }}</p>
+                    {% if post.excerpt %}
+                        <p class="text-sm text-[#7a7266] mt-2 line-clamp-2">{{ post.excerpt }}</p>
                     {% endif %}
 
                     {% if post.terms.equipement is defined %}
