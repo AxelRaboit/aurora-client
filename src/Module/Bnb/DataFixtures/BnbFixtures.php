@@ -427,7 +427,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
     private function pageBlocks(EntityManagerInterface $manager, array $config, string $locale): array
     {
         $blocks = [
-            ['type' => 'heading', 'data' => ['text' => $config[$locale]['heading'], 'level' => 1]],
+            ['type' => 'header', 'data' => ['text' => $config[$locale]['heading'], 'level' => 1]],
             ['type' => 'intro', 'data' => ['text' => $config[$locale]['body']]],
         ];
 
@@ -446,7 +446,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             ]];
         }
 
-        $blocks[] = ['type' => 'heading', 'data' => [
+        $blocks[] = ['type' => 'header', 'data' => [
             'text' => $isFrench ? 'Les chambres' : 'The rooms',
             'level' => 2,
         ]];
@@ -481,7 +481,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
 
         $blocks[] = ['type' => 'delimiter', 'data' => []];
 
-        $blocks[] = ['type' => 'heading', 'data' => [
+        $blocks[] = ['type' => 'header', 'data' => [
             'text' => $isFrench ? 'Aux alentours' : 'Nearby',
             'level' => 2,
         ]];
