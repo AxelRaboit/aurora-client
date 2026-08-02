@@ -12,6 +12,7 @@ use Aurora\Module\Editorial\Menu\Entity\MenuItemTranslation;
 use Aurora\Module\Editorial\Menu\Enum\MenuItemTargetTypeEnum;
 use Aurora\Module\Editorial\Menu\Enum\MenuItemVisibilityEnum;
 use Aurora\Module\Editorial\Post\Entity\Post;
+use Aurora\Module\Editorial\Post\Entity\PostInterface;
 use Aurora\Module\Editorial\Post\Entity\PostTranslation;
 use Aurora\Module\Editorial\Post\Enum\PostStatusEnum;
 use Aurora\Module\Editorial\Post\Service\PostTextExtractor;
@@ -19,6 +20,7 @@ use Aurora\Module\Editorial\PostType\Entity\PostType;
 use Aurora\Module\Editorial\PostType\Entity\PostTypeField;
 use Aurora\Module\Editorial\Taxonomy\Entity\Taxonomy;
 use Aurora\Module\Editorial\Taxonomy\Entity\TaxonomyTerm;
+use Aurora\Module\Editorial\Taxonomy\Entity\TaxonomyTermInterface;
 use Aurora\Module\Ged\Document\Entity\Document;
 use Aurora\Module\Ged\Document\Service\DocumentUrlGenerator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -84,7 +86,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
     ];
 
     /**
-     * @var list<array{slug: string, fr: array{title: string, teaser: string}, en: array{title: string, teaser: string}, fields: array<string, mixed>, amenities: list<string>, media: int}>
+     * @var list<array{slug: string, fr: array{title: string, teaser: string, meta: string}, en: array{title: string, teaser: string, meta: string}, fields: array<string, mixed>, amenities: list<string>, media: int}>
      */
     private const array ROOMS = [
         [
@@ -144,7 +146,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
      * The pages a guest house needs beyond its rooms. Kept short on purpose —
      * the demo is about showing a real site shape, not writing a brochure.
      *
-     * @var list<array{slug: string, fr: array{title: string, heading: string, body: string}, en: array{title: string, heading: string, body: string}}>
+     * @var list<array{slug: string, fr: array{title: string, heading: string, body: string, meta: string}, en: array{title: string, heading: string, body: string, meta: string}}>
      */
     private const array PAGES = [
         [
@@ -366,7 +368,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
     /**
      * The pages, created once and reused on a second run.
      *
-     * @return array<string, Post> keyed by slug
+     * @return array<string, PostInterface> keyed by slug
      */
     private function pages(EntityManagerInterface $manager): array
     {
@@ -509,7 +511,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
      * and leaving it pointing at the blog demo's page would be the mixing we
      * are trying to avoid.
      *
-     * @param array<string, Post> $pages
+     * @param array<string, PostInterface> $pages
      */
     private function homepage(EntityManagerInterface $manager, array $pages): void
     {
@@ -539,7 +541,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
      * is left alone: its entries are protected by Aurora and belong to the
      * platform rather than to either demo.
      *
-     * @param array<string, Post> $pages
+     * @param array<string, PostInterface> $pages
      */
     private function menus(EntityManagerInterface $manager, PostType $roomType, array $pages): void
     {
@@ -551,21 +553,21 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
                 ['type' => MenuItemTargetTypeEnum::Home, 'fr' => 'Accueil', 'en' => 'Home'],
                 ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Les chambres', 'en' => 'The rooms'],
                 [
-                    'type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']?->getId(),
+                    'type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']->getId(),
                     'fr' => 'La maison', 'en' => 'The house',
                     'children' => [
-                        ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['les-salons']?->getId(), 'fr' => 'Les salons', 'en' => 'The living rooms'],
-                        ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['les-exterieurs']?->getId(), 'fr' => 'Les extérieurs', 'en' => 'The grounds'],
+                        ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['les-salons']->getId(), 'fr' => 'Les salons', 'en' => 'The living rooms'],
+                        ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['les-exterieurs']->getId(), 'fr' => 'Les extérieurs', 'en' => 'The grounds'],
                     ],
                 ],
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['infos-pratiques']?->getId(), 'fr' => 'Infos pratiques', 'en' => 'Practical information'],
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact & réservations', 'en' => 'Contact & booking'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['infos-pratiques']->getId(), 'fr' => 'Infos pratiques', 'en' => 'Practical information'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']->getId(), 'fr' => 'Contact & réservations', 'en' => 'Contact & booking'],
             ],
             'footer' => [
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']?->getId(), 'fr' => 'La maison', 'en' => 'The house'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['la-maison']->getId(), 'fr' => 'La maison', 'en' => 'The house'],
                 ['type' => MenuItemTargetTypeEnum::PostTypeArchive, 'target' => $roomType->getId(), 'fr' => 'Les chambres', 'en' => 'The rooms'],
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['infos-pratiques']?->getId(), 'fr' => 'Infos pratiques', 'en' => 'Practical information'],
-                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']?->getId(), 'fr' => 'Contact & réservations', 'en' => 'Contact & booking'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['infos-pratiques']->getId(), 'fr' => 'Infos pratiques', 'en' => 'Practical information'],
+                ['type' => MenuItemTargetTypeEnum::Post, 'target' => $pages['contact-mas']->getId(), 'fr' => 'Contact & réservations', 'en' => 'Contact & booking'],
             ],
         ];
 
@@ -633,7 +635,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
      * the translation, so this goes through the translation table rather than
      * findOneBy on the term itself.
      */
-    private function existingTerm(EntityManagerInterface $manager, Taxonomy $taxonomy, string $slug): ?TaxonomyTerm
+    private function existingTerm(EntityManagerInterface $manager, Taxonomy $taxonomy, string $slug): ?TaxonomyTermInterface
     {
         foreach ($taxonomy->getTerms() as $term) {
             if ($term->translate('fr')->getSlug() === $slug) {
@@ -645,8 +647,8 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
     }
 
     /**
-     * @param array<string, TaxonomyTerm>                                                                                                                                                $terms
-     * @param array{slug: string, fr: array{title: string, teaser: string}, en: array{title: string, teaser: string}, fields: array<string, mixed>, amenities: list<string>, media: int} $room
+     * @param array<string, TaxonomyTerm>                                                                                                                                                                            $terms
+     * @param array{slug: string, fr: array{title: string, teaser: string, meta: string}, en: array{title: string, teaser: string, meta: string}, fields: array<string, mixed>, amenities: list<string>, media: int} $room
      */
     private function room(EntityManagerInterface $manager, PostType $roomType, array $terms, array $room): void
     {
