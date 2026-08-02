@@ -152,11 +152,13 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             'fr' => [
                 'title' => 'Accueil',
                 'heading' => 'Le Mas des Oliviers',
+                'meta' => "Maison d'hôtes de six chambres entre vignes et oliviers. Petit-déjeuner maison, piscine chauffée d'avril à octobre.",
                 'body' => "Une maison d'hôtes de six chambres au cœur des collines, entre vignes et oliviers. Petit-déjeuner maison, piscine ouverte d'avril à octobre, et le silence pour seul voisin.",
             ],
             'en' => [
                 'title' => 'Home',
                 'heading' => 'Le Mas des Oliviers',
+                'meta' => 'Six-room guest house between vineyards and olive groves. Home-made breakfast, pool heated from April to October.',
                 'body' => 'A six-room guest house in the hills, between vineyards and olive groves. Home-made breakfast, a pool open from April to October, and silence for a neighbour.',
             ],
         ],
@@ -165,11 +167,13 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             'fr' => [
                 'title' => 'La maison',
                 'heading' => 'Une bastide du XVIIIᵉ, restaurée avec patience',
+                'meta' => 'Une bastide du XVIIIᵉ restaurée pierre par pierre depuis 2019. Six chambres donnant sur le jardin ou la vallée.',
                 'body' => 'Nous avons repris le mas en 2019 et passé trois ans à le remettre debout, pierre par pierre. Les chambres donnent sur le jardin ou sur la vallée. Le petit-déjeuner se prend sous la treille dès les beaux jours.',
             ],
             'en' => [
                 'title' => 'The house',
                 'heading' => 'An 18th-century farmhouse, patiently restored',
+                'meta' => 'An 18th-century farmhouse restored stone by stone since 2019. Six rooms looking onto the garden or the valley.',
                 'body' => 'We took the place on in 2019 and spent three years putting it back together, stone by stone. Rooms look out over the garden or the valley. Breakfast is served under the arbour once the weather turns.',
             ],
         ],
@@ -178,11 +182,13 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             'fr' => [
                 'title' => 'Les salons',
                 'heading' => 'Deux salons, une cheminée, aucune télévision',
+                'meta' => "Deux salons à disposition des hôtes : cheminée d'origine, bibliothèque, terrasse — et aucune télévision.",
                 'body' => "Le grand salon ouvre sur la terrasse et sert de salle de petit-déjeuner les matins de pluie. Le petit salon, à l'étage, garde sa cheminée d'origine et une bibliothèque que nos hôtes alimentent depuis six ans.",
             ],
             'en' => [
                 'title' => 'The living rooms',
                 'heading' => 'Two sitting rooms, one fireplace, no television',
+                'meta' => 'Two sitting rooms for guests: original fireplace, library, terrace — and no television.',
                 'body' => 'The main room opens onto the terrace and doubles as the breakfast room on rainy mornings. The upstairs room keeps its original fireplace and a library our guests have been feeding for six years.',
             ],
         ],
@@ -191,11 +197,13 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             'fr' => [
                 'title' => 'Les extérieurs',
                 'heading' => "Un hectare de jardin, une piscine, et de l'ombre partout",
+                'meta' => "Un hectare de jardin, une piscine chauffée d'avril à octobre, un potager et de l'ombre sous les platanes.",
                 'body' => "La piscine est chauffée d'avril à octobre et jamais bondée : six chambres, ça fait rarement plus de dix personnes. Le potager fournit la table en été, et les transats sous les platanes sont le meilleur endroit de la maison à 17 heures.",
             ],
             'en' => [
                 'title' => 'The grounds',
                 'heading' => 'An acre of garden, a pool, and shade everywhere',
+                'meta' => 'An acre of garden, a pool heated from April to October, a kitchen garden and shade under the plane trees.',
                 'body' => 'The pool is heated from April to October and never crowded — six rooms rarely means more than ten people. The kitchen garden feeds the table in summer, and the loungers under the plane trees are the best spot in the house at five in the afternoon.',
             ],
         ],
@@ -204,11 +212,13 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             'fr' => [
                 'title' => 'Infos pratiques',
                 'heading' => "Tout ce qu'il faut savoir avant de venir",
+                'meta' => 'Arrivée dès 16 h, départ avant 11 h. Cartes et virements acceptés. À 20 minutes de la gare, navette sur demande.',
                 'body' => 'Arrivée à partir de 16 heures, départ avant 11 heures. Nous acceptons les cartes et les virements, pas les chèques. Le mas est à 20 minutes de la gare et nous venons vous chercher sur demande.',
             ],
             'en' => [
                 'title' => 'Practical information',
                 'heading' => 'Everything worth knowing before you come',
+                'meta' => 'Check-in from 4pm, check-out before 11am. Cards and transfers accepted. 20 minutes from the station, pick-up on request.',
                 'body' => 'Check-in from 4pm, check-out before 11am. We take cards and transfers, not cheques. The house is 20 minutes from the station and we will collect you on request.',
             ],
         ],
@@ -217,11 +227,13 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             'fr' => [
                 'title' => 'Contact & réservations',
                 'heading' => 'Réserver ou poser une question',
+                'meta' => 'Vérifiez nos disponibilités : réponse sous 24 heures. Navette depuis la gare possible sur demande.',
                 'body' => 'Écrivez-nous pour vérifier nos disponibilités : nous répondons sous 24 heures. Le mas se trouve à 20 minutes de la gare, navette possible sur demande.',
             ],
             'en' => [
                 'title' => 'Contact & booking',
                 'heading' => 'Book, or ask us anything',
+                'meta' => 'Check our availability — we answer within 24 hours. Pick-up from the station on request.',
                 'body' => 'Write to us to check availability — we answer within 24 hours. The house is 20 minutes from the station, and we can arrange a pick-up.',
             ],
         ],
@@ -370,12 +382,17 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
             $manager->persist($page);
 
             foreach (['fr', 'en'] as $locale) {
+                // 'meta' is written for a search result and stays under the 160
+                // characters a snippet shows; 'body' is the standfirst a reader
+                // sees, and goes into an intro block. They used to be the same
+                // string, which produced 247-character "meta descriptions" —
+                // prose that Google would simply cut in half.
                 $translation = new PostTranslation()
                     ->setPost($page)
                     ->setLocale($locale)
                     ->setTitle($config[$locale]['title'])
                     ->setSlug($config['slug'])
-                    ->setMetaDescription($config[$locale]['body'])
+                    ->setMetaDescription($config[$locale]['meta'])
                     ->setBlocks($this->pageBlocks($manager, $config, $locale));
                 $translation->setSearchContent($this->textExtractor->extract($translation));
                 $manager->persist($translation);
@@ -405,7 +422,7 @@ class BnbFixtures extends Fixture implements FixtureGroupInterface
     {
         $blocks = [
             ['type' => 'heading', 'data' => ['text' => $config[$locale]['heading'], 'level' => 1]],
-            ['type' => 'paragraph', 'data' => ['text' => $config[$locale]['body']]],
+            ['type' => 'intro', 'data' => ['text' => $config[$locale]['body']]],
         ];
 
         if ('la-maison' !== $config['slug']) {
