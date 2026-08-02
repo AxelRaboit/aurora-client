@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f93de3931e54a41ded1e456b2708d6e",
+    "content-hash": "0bb5474344343a8cdcedae1f2ae681cf",
     "packages": [
         {
             "name": "axelraboit/aurora",
@@ -127,46 +127,6 @@
                 "issues": "https://github.com/AxelRaboit/aurora-core/issues"
             },
             "time": "2026-08-02T06:45:28+00:00"
-        },
-        {
-            "name": "axelraboit/aurora-editorial",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AxelRaboit/aurora-editorial.git",
-                "reference": "9c6943c07d60ec93fd0494ffc1167ff6cc42b7ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-editorial/zipball/9c6943c07d60ec93fd0494ffc1167ff6cc42b7ad",
-                "reference": "9c6943c07d60ec93fd0494ffc1167ff6cc42b7ad",
-                "shasum": ""
-            },
-            "require": {
-                "axelraboit/aurora": "@dev",
-                "php": ">=8.4"
-            },
-            "default-branch": true,
-            "type": "symfony-bundle",
-            "extra": {
-                "symfony": {
-                    "bundle": "Aurora\\Module\\Editorial\\AuroraEditorialBundle"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aurora\\Module\\Editorial\\": ""
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "description": "Editorial (CMS) module for the Aurora platform.",
-            "support": {
-                "source": "https://github.com/AxelRaboit/aurora-editorial/tree/master",
-                "issues": "https://github.com/AxelRaboit/aurora-editorial/issues"
-            },
-            "time": "2026-08-02T06:45:29+00:00"
         },
         {
             "name": "brick/math",
@@ -11056,8 +11016,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "axelraboit/aurora": 20,
-        "axelraboit/aurora-editorial": 20
+        "axelraboit/aurora": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
