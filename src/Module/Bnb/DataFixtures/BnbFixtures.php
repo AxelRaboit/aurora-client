@@ -16,6 +16,7 @@ use Aurora\Module\Editorial\Post\Entity\Post;
 use Aurora\Module\Editorial\Post\Entity\PostInterface;
 use Aurora\Module\Editorial\Post\Entity\PostTranslation;
 use Aurora\Module\Editorial\Post\Enum\PostStatusEnum;
+use Aurora\Module\Editorial\Post\Service\EditorBlocks;
 use Aurora\Module\Editorial\Post\Service\PostTextExtractor;
 use Aurora\Module\Editorial\PostType\Entity\PostType;
 use Aurora\Module\Editorial\PostType\Entity\PostTypeField;
@@ -519,12 +520,12 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
                 : 'Six rooms, all different, spread between the farmhouse and the old silkworm shed. None of them faces the road. We kept the original floor tiles wherever they held, and rebuilt the bathrooms from scratch.',
         ]];
 
-        $blocks[] = ['type' => 'list', 'data' => [
-            'style' => 'unordered',
-            'items' => $isFrench
-                ? ['Draps en lin lavé et linge de toilette fournis', 'Petit-déjeuner maison servi de 8h à 10h30', 'Piscine chauffée ouverte d\'avril à octobre', 'Parking clos dans la cour', 'Wi-Fi fibre dans toute la maison']
-                : ['Washed linen sheets and towels provided', 'Home-made breakfast served 8:00–10:30', 'Heated pool open April to October', 'Enclosed parking in the courtyard', 'Fibre Wi-Fi throughout the house'],
-        ]];
+        // Through EditorBlocks: a list written by hand renders on the site
+        // and refuses to open in the editor, because the tool is stricter than
+        // the renderer.
+        $blocks[] = EditorBlocks::list($isFrench
+            ? ['Draps en lin lavé et linge de toilette fournis', 'Petit-déjeuner maison servi de 8h à 10h30', 'Piscine chauffée ouverte d\'avril à octobre', 'Parking clos dans la cour', 'Wi-Fi fibre dans toute la maison']
+            : ['Washed linen sheets and towels provided', 'Home-made breakfast served 8:00–10:30', 'Heated pool open April to October', 'Enclosed parking in the courtyard', 'Fibre Wi-Fi throughout the house']);
 
         $blocks[] = ['type' => 'mediaText', 'data' => [
             'image' => ['url' => $portrait],
