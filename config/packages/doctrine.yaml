@@ -7,9 +7,11 @@ doctrine:
         schema_filter: ~^(?!messenger_messages$).*~
     orm:
         # Map an Aurora entity interface to a client concrete here when you
-        # substitute an entity, e.g.:
-        #   resolve_target_entities:
-        #       Aurora\Module\<X>\Entity\<X>Interface: App\Module\<X>\Entity\<X>
+        # substitute an entity. Without the mapping the client class is just
+        # a second, unused entity: Aurora keeps type-hinting the interface and
+        # keeps resolving it to its own concrete.
+        resolve_target_entities:
+            Aurora\Module\Ged\DocumentCategory\Entity\DocumentCategoryInterface: App\Module\Ged\DocumentCategory\Entity\DocumentCategory
         mappings:
             AuroraClient:
                 type: attribute
