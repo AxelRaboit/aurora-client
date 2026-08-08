@@ -19,6 +19,9 @@
             "@dev/*": [
                 "./vendor/axelraboit/aurora/src/Module/Dev/assets/*"
             ],
+            "@editorial/*": [
+                "./vendor/axelraboit/aurora/src/Module/Editorial/assets/*"
+            ],
             "@ged/*": [
                 "./vendor/axelraboit/aurora/src/Module/Ged/assets/*"
             ],
