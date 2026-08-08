@@ -1,6 +1,6 @@
 {
-    "name": "axelraboit/aurora-myspace",
-    "description": "MySpace — Aurora-based client application",
+    "name": "axelraboit/aurora-client",
+    "description": "Aurora-based client application — à-la-carte modules over VCS (no Packagist).",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",

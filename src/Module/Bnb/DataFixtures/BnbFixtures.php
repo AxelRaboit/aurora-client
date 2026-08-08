@@ -283,7 +283,10 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
 
     public static function getGroups(): array
     {
-        return ['bnb'];
+        // `demo`, not `bnb`: `make demo` loads `--group=demo`, so a group of
+        // its own meant this fixture was silently never loaded by the only
+        // target that loads fixtures at all.
+        return ['demo'];
     }
 
     /**
