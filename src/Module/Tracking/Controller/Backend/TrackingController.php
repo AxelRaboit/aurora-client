@@ -23,11 +23,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  *   off, and a 404 is the honest answer there — the screen does not exist,
  *   rather than existing and being forbidden.
  *
- * The template lives under the project's `templates/`, not under
- * `src/Module/Tracking/templates/`. Aurora registers the co-located path only
- * for module names it ships itself — the glob runs over aurora-core's own
- * `src/Module/*` — so a purely client-side module has no Twig namespace of
- * its own and uses Symfony's default path.
+ * The template is co-located under `src/Module/Tracking/templates/` and
+ * reached through the `@Tracking` namespace — aurora derives it from the
+ * module's directory name, for modules the client owns as well as its own.
  */
 #[Route('/backend/tracking', name: 'backend_tracking_dashboard')]
 #[IsGranted('tracking.dashboard.view')]
@@ -42,6 +40,6 @@ final class TrackingController extends AbstractController
             throw $this->createNotFoundException('Tracking is disabled on this installation.');
         }
 
-        return $this->render('tracking/index.html.twig');
+        return $this->render('@Tracking/backend/index.html.twig');
     }
 }

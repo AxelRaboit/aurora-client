@@ -1,12 +1,9 @@
-# Traductions propres au projet client.
-#
-# Elles vivent ici, à la racine, et non sous src/Module/Tracking/translations/ :
-# aurora-core n'enregistre les dossiers de traduction co-localisés que pour les
-# modules qu'il embarque lui-même (le glob parcourt son propre src/Module/*).
-# Un module purement client passe donc par le chemin Symfony par défaut.
+# Catalogue propre au module, co-localisé avec lui — aurora découvre
+# src/Module/<X>/translations/ des modules du client comme des siens.
 #
 # Les clés de toggle et de nav sont lues par le core (sidemenu, modale d'accès
-# aux modules), d'où les préfixes `backend.nav.*` et `backend.modules.*`.
+# aux modules), d'où les préfixes `backend.nav.*` et `backend.modules.*` :
+# c'est le core qui les affiche, le module ne fait que les fournir.
 backend:
   nav:
     tracking_dashboard: Tracking
