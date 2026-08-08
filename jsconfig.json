@@ -2,16 +2,16 @@
     "compilerOptions": {
         "paths": {
             "@/*": [
-                "./vendor/axelraboit/aurora/src/Core/Frontend/*"
+                "./vendor/axelraboit/aurora/src/Core/assets/*"
             ],
             "@core/*": [
-                "./vendor/axelraboit/aurora/src/Core/Frontend/*"
+                "./vendor/axelraboit/aurora/src/Core/assets/*"
             ],
             "@shared/*": [
-                "./vendor/axelraboit/aurora/src/Core/Frontend/shared/*"
+                "./vendor/axelraboit/aurora/src/Core/assets/shared/*"
             ],
             "@client/*": [
-                "./assets/client/*"
+                "./*"
             ],
             "@configuration/*": [
                 "./vendor/axelraboit/aurora/src/Module/Configuration/assets/*"
