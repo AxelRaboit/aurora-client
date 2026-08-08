@@ -1,0 +1,19 @@
+# Client-project translations.
+#
+# They live at the project root rather than under
+# src/Module/Tracking/translations/: aurora-core only registers co-located
+# translation dirs for the modules it ships itself (the glob walks its own
+# src/Module/*). A purely client-side module uses Symfony's default path.
+#
+# The toggle and nav keys are read by the core (sidemenu, module-access
+# modal), hence the `backend.nav.*` and `backend.modules.*` prefixes.
+backend:
+  nav:
+    tracking_dashboard: Tracking
+  modules:
+    tracking: Tracking
+    tracking_description: Project-specific tracking screen — example of a self-contained client module.
+  tracking:
+    title: Tracking
+    subtitle: A self-contained client module, added without changing anything in aurora-core.
+    placeholder: This screen exists only to demonstrate the full wiring of a client module — module, context, controller, view, translations and toggle.
