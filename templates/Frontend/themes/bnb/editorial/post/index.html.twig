@@ -74,8 +74,26 @@
     {% endif %}
 
     {# The standfirst used to be printed here from the meta description. It is
-       an Introduction block now, so it arrives inside `content` — written for
-       the reader rather than for a search snippet. #}
-    <div class="prose prose-neutral max-w-none mt-8">{{ content|raw }}</div>
+       an Introduction block now, so it arrives inside the body — written for
+       the reader rather than for a search snippet.
+
+       The body is a content grid since aurora-core migrated every plain block
+       column into one. Rendering `content` alone would have kept working for
+       exactly as long as nobody edited the page: `blocks` is deliberately not
+       dropped, so it still holds what it held, and it stops being written the
+       moment an author touches the grid. The site would have gone on showing
+       the old words with no error anywhere.
+
+       The core partial is included rather than reimplemented, so a zone type
+       added there arrives here without this file being touched — and so this
+       theme cannot drift into rendering a shape the editor no longer writes.
+       `content` stays as the fallback for a publication that has no grid. #}
+    <div class="prose prose-neutral max-w-none mt-8">
+        {% if grid %}
+            {{ include('Frontend/themes/default/editorial/post/_grid.html.twig', {grid: grid, locale: locale}) }}
+        {% else %}
+            {{ content|raw }}
+        {% endif %}
+    </div>
 </article>
 {% endblock %}
