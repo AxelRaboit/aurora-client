@@ -4,10 +4,14 @@
    not by post type. #}
 {% extends 'Frontend/themes/bnb/layout.html.twig' %}
 
+{# `image` used to fall back to `featuredMediaData`. That variable is gone —
+   aurora-core renamed the featured image to the thumbnail and stopped passing
+   it — and the fallback was already dead weight, because `ogImage` falls back
+   to the thumbnail on the server side. #}
 {% block seo_define %}{% do seo({
     title: translationData.metaTitle ?? translationData.title,
     description: translationData.metaDescription,
-    image: translationData.ogImage ?? featuredMediaData,
+    image: translationData.ogImage,
     type: 'article',
     noindex: translationData.noindex|default(false),
 }) %}{% endblock %}
@@ -16,11 +20,16 @@
 {% set isRoom = postData.postType.slug == 'chambre' %}
 {% set fields = translationData.customFields|default({}) %}
 
-{% if featuredMediaData %}
+{# `featuredMediaData` is gone: aurora-core renamed the featured image to the
+   thumbnail and stopped passing it as a variable of its own. What is left is
+   `translationData.ogImage`, which falls back to the thumbnail when no social
+   image is set — the same picture this hero used to show. It carries no focal
+   point (that one belongs to the card, where a wide photo has to work in a
+   narrow frame), so the crop is centred. #}
+{% if translationData.ogImage %}
     <div class="w-full h-[42vh] min-h-72 bg-[#efe8dd] overflow-hidden">
-        <img src="{{ featuredMediaData.publicUrl }}" alt="{{ translationData.title }}"
-             class="w-full h-full object-cover"
-             style="object-position: {{ featuredMediaData.focalPosition|default('50% 50%') }}">
+        <img src="{{ translationData.ogImage.publicUrl }}" alt="{{ translationData.title }}"
+             class="w-full h-full object-cover">
     </div>
 {% endif %}
 

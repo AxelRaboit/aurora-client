@@ -724,7 +724,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
         }
 
         $post = new Post()->setPostType($roomType)->setStatus(PostStatusEnum::Published);
-        $post->setFeaturedMedia($manager->getRepository(Document::class)->find($room['media']));
+        $post->setThumbnail($manager->getRepository(Document::class)->find($room['media']));
 
         foreach ($room['amenities'] as $amenitySlug) {
             if (isset($terms[$amenitySlug])) {
