@@ -6,7 +6,6 @@ namespace App\Module\Bnb\DataFixtures;
 
 use Aurora\Module\Configuration\Setting\Entity\Setting;
 use Aurora\Module\Configuration\Setting\Enum\ApplicationParameterEnum;
-use Aurora\Module\Configuration\Theme\Entity\Theme;
 use Aurora\Module\Editorial\Menu\Entity\Menu;
 use Aurora\Module\Editorial\Menu\Entity\MenuItem;
 use Aurora\Module\Editorial\Menu\Entity\MenuItemTranslation;
@@ -36,8 +35,14 @@ use RuntimeException;
 use function assert;
 
 /**
- * Demo content for the guest house theme: a "Chambre" post type, the
- * taxonomies that describe a room, and half a dozen rooms to fill the site.
+ * Demo content for a guest house: a "Chambre" post type, the taxonomies that
+ * describe a room, and half a dozen rooms to fill the site.
+ *
+ * There was a `bnb` theme beside this — four templates and a Theme row this
+ * fixture activated — and it is gone. What is left renders with the default
+ * theme, which is the point the demo was always making: a room is the post
+ * type's custom fields, reachable from the backend without writing PHP, and
+ * nothing about it needed a theme of its own.
  *
  * Configures the whole site, not just the rooms: pages, homepage and the two
  * public menus. Aurora has one menu per location, so the blog demo and this one
@@ -52,9 +57,6 @@ use function assert;
 class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     private const string ROOM_TYPE_SLUG = 'chambre';
-
-    /** Matches the directory at `templates/Frontend/themes/bnb/`. */
-    private const string THEME_SLUG = 'bnb';
 
     /** Attached to the room type so a room can be filtered by what it offers. */
     private const array TAXONOMIES = [
@@ -318,40 +320,8 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
         $pages = $this->pages($manager);
         $this->homepage($manager, $pages);
         $this->menus($manager, $roomType, $pages);
-        $this->theme($manager);
 
         $manager->flush();
-    }
-
-    /**
-     * Switches the site onto the guest-house theme.
-     *
-     * Without this the fixture loaded its content and left the site rendering
-     * with `default` — so the four templates it ships were never reached, and
-     * "load this and the site becomes a guest house" was two-thirds true. A
-     * theme is a row an administrator creates, not a directory Aurora
-     * discovers, so the demo has to create its own.
-     */
-    private function theme(EntityManagerInterface $manager): void
-    {
-        $repository = $manager->getRepository(Theme::class);
-
-        $theme = $repository->findOneBy(['slug' => self::THEME_SLUG]);
-        if (!$theme instanceof Theme) {
-            $theme = new Theme()
-                ->setSlug(self::THEME_SLUG)
-                ->setName('Maison d\'hôtes')
-                ->setDescription('Thème de la démo Mas des Oliviers.');
-
-            $manager->persist($theme);
-        }
-
-        // One theme is active at a time, so the others step down.
-        foreach ($repository->findBy(['active' => true]) as $other) {
-            $other->setActive(false);
-        }
-
-        $theme->setActive(true);
     }
 
     private function roomType(EntityManagerInterface $manager): PostType
