@@ -15,6 +15,7 @@ use Aurora\Module\Editorial\Post\Entity\Post;
 use Aurora\Module\Editorial\Post\Entity\PostInterface;
 use Aurora\Module\Editorial\Post\Entity\PostTranslation;
 use Aurora\Module\Editorial\Post\Enum\PostStatusEnum;
+use Aurora\Module\Editorial\Post\Grid\GridNormalizer;
 use Aurora\Module\Editorial\Post\Service\EditorBlocks;
 use Aurora\Module\Editorial\Post\Service\PostTextExtractor;
 use Aurora\Module\Editorial\PostType\Entity\PostType;
@@ -260,6 +261,10 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
         // hardcoding them breaks the moment the media fixtures run in another
         // month.
         private readonly DocumentUrlGenerator $documentUrls,
+        // The grid is the body now, and its shape belongs to the normaliser
+        // rather than to whatever a fixture happens to write. Going through it
+        // is what keeps this file honest when the shape gains a field.
+        private readonly GridNormalizer $gridNormalizer,
     ) {}
 
     /**
@@ -424,6 +429,21 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
             }
 
             $page = new Post()->setPostType($pageType)->setStatus(PostStatusEnum::Published);
+
+            // A body is a content grid of one full-width text zone. The plain
+            // `blocks` column it used to be is gone from aurora-core, migrated
+            // into exactly this shape — and a fixture reloads a fresh database,
+            // where that migration has already run and will not run again.
+            $page->setGridLayout($this->gridNormalizer->normalizeLayout([
+                'enabled' => true,
+                'snap' => 4,
+                'zones' => [[
+                    'id' => 'body',
+                    'type' => 'text',
+                    'span' => ['base' => 48, 'md' => null, 'lg' => 48],
+                ]],
+            ]));
+
             $manager->persist($page);
 
             foreach (['fr', 'en'] as $locale) {
@@ -438,8 +458,12 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
                     ->setTitle($config[$locale]['title'])
                     ->setSlug($config['slug'])
                     ->setDescription($config[$locale]['body'])
-                    ->setMetaDescription($config[$locale]['meta'])
-                    ->setBlocks($this->pageBlocks($manager, $config, $locale));
+                    ->setMetaDescription($config[$locale]['meta']);
+
+                $translation->setGrid($this->gridNormalizer->normalizeContent([
+                    'zones' => ['body' => ['blocks' => $this->pageBlocks($manager, $config, $locale)]],
+                ], $page->getGridLayout()));
+
                 $translation->setSearchContent($this->textExtractor->extract($translation));
                 $manager->persist($translation);
             }
