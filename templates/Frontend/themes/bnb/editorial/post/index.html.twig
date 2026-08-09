@@ -28,8 +28,12 @@
    narrow frame), so the crop is centred. #}
 {% if translationData.ogImage %}
     <div class="w-full h-[42vh] min-h-72 bg-[#efe8dd] overflow-hidden">
+        {# The focal point is the document's, and aurora-core now passes it: a
+           wide photo in a band this shallow crops to its middle otherwise,
+           which on a landscape is usually sky. #}
         <img src="{{ translationData.ogImage.publicUrl }}" alt="{{ translationData.title }}"
-             class="w-full h-full object-cover">
+             class="w-full h-full object-cover"
+             style="object-position: {{ translationData.ogImage.focalPosition|default('50% 50%') }}">
     </div>
 {% endif %}
 
