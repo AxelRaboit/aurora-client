@@ -13,7 +13,7 @@ use Aurora\Core\Module\Nav\NavSection;
 use Aurora\Core\Module\Toggle\ModuleToggle;
 
 /**
- * A self-contained client module — reference example.
+ * A self-contained client module - reference example.
  *
  * Nothing here extends an Aurora class. This is the other half of the client
  * story: {@see DocumentCategory} shows
@@ -23,7 +23,7 @@ use Aurora\Core\Module\Toggle\ModuleToggle;
  *
  * It is picked up with no registration anywhere: `config/services.yaml`
  * mirrors aurora-core's `_instanceof` block, which tags any
- * `ModuleInterface` with `aurora.module`. That mirror is required —
+ * `ModuleInterface` with `aurora.module`. That mirror is required -
  * `_instanceof` is scoped to the file that declares it and does not cross
  * bundle boundaries, so without it this class would be a plain service and
  * the module would silently never exist.

@@ -1,4 +1,4 @@
-# Catalogue propre au module, co-localisé avec lui — aurora découvre
+# Catalogue propre au module, co-localisé avec lui - aurora découvre
 # src/Module/<X>/translations/ des modules du client comme des siens.
 #
 # Les clés de toggle et de nav sont lues par le core (sidemenu, modale d'accès
@@ -9,8 +9,8 @@ backend:
     tracking_dashboard: Tracking
   modules:
     tracking: Tracking
-    tracking_description: Écran de suivi propre à ce projet — exemple de module client autonome.
+    tracking_description: Écran de suivi propre à ce projet - exemple de module client autonome.
   tracking:
     title: Tracking
     subtitle: Module client autonome, ajouté sans rien modifier dans aurora-core.
-    placeholder: Cet écran ne sert qu'à démontrer le câblage complet d'un module client — module, contexte, contrôleur, vue, traductions et toggle.
+    placeholder: Cet écran ne sert qu'à démontrer le câblage complet d'un module client - module, contexte, contrôleur, vue, traductions et toggle.

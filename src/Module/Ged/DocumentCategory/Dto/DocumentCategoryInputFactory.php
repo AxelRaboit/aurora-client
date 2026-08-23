@@ -12,7 +12,7 @@ use Override;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
- * Layer 2 of the client extension — reference example.
+ * Layer 2 of the client extension - reference example.
  *
  * `#[AsAlias]` is what makes controllers resolve this factory instead of
  * Aurora's: they type-hint `DocumentCategoryInputFactoryInterface`, and the
@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsAlias;
  *
  * Mind the import of that interface. `DocumentCategoryInputFactoryInterface::class`
  * without a `use` resolves against the *current* namespace, so the attribute
- * would alias `App\…\DocumentCategoryInputFactoryInterface` — a name nothing
+ * would alias `App\…\DocumentCategoryInputFactoryInterface` - a name nothing
  * implements. PHP accepts it, phpstan accepts it, and the override simply
  * never happens. `php bin/console debug:autowiring DocumentCategory` is what
  * shows it: the interface still points at the Aurora class.

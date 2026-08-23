@@ -30,7 +30,7 @@ jobs:
       APP_SECRET: ci_secret_not_used_in_prod
       # Dummy 32-byte base64 keys for CI runs only (generated via
       # `php -r "echo base64_encode(random_bytes(32));"`). No production
-      # data is exposed — the CI database is dropped + recreated each run.
+      # data is exposed - the CI database is dropped + recreated each run.
       AURORA_MOUNT_POINT_KEY: 5MfMH2+7ngPYxvDGrMQLgdT55Usw3W+asWjICfhl//g=
       AURORA_ENCRYPTION_KEY: mm5PI515AWOnVgBdWgt9+/qhpTEnUoflQNyhhC+7Dww=
       DATABASE_URL: postgresql://app:!ChangeMe!@127.0.0.1:5432/aurora_client?serverVersion=18&charset=utf8
@@ -49,11 +49,11 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      # —— Setup GitHub actions 🐙 ———————————————————————————————————————————————————
+      # -- Setup GitHub actions 🐙 ---------------------------------------------------
       - name: Checkout
         uses: actions/checkout@v4
 
-      # —— PHP & Composer 🧙‍️ —————————————————————————————————————————————————————————
+      # -- PHP & Composer 🧙‍️ ---------------------------------------------------------
       - name: Setup PHP, extensions & composer with shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
@@ -102,7 +102,7 @@ jobs:
           (cd $AURORA/tools/rector && composer install --no-ansi --no-interaction && chmod +x vendor/bin/*)
           (cd $AURORA/tools/phpstan && composer install --no-ansi --no-interaction && chmod +x vendor/bin/*)
 
-      # —— PNPM & Vite 🟨 ————————————————————————————————————————————————————————————
+      # -- PNPM & Vite 🟨 ------------------------------------------------------------
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -138,7 +138,7 @@ jobs:
       - name: Build assets
         run: make build
 
-      # —— Coding standards ✨ ——————————————————————————————————————————————————————
+      # -- Coding standards ✨ ------------------------------------------------------
       - name: PHP CS Fixer
         run: make lint-php
 
@@ -161,7 +161,7 @@ jobs:
       - name: Lint JavaScript
         run: make lint-js
 
-      # —— Static analysis ✨ —————————————————————————————————————————————————
+      # -- Static analysis ✨ -------------------------------------------------
       - name: PHPStan Cache
         uses: actions/cache@v4
         with:
@@ -172,10 +172,10 @@ jobs:
       - name: PHPStan
         run: make stan
 
-      # —— Test database 🗄️ ——————————————————————————————————————————————————
+      # -- Test database 🗄️ --------------------------------------------------
       # Multi-namespace migrations (ClientMigrations + DoctrineMigrations from
       # the aurora-core vendor) don't reliably interleave by version on a
-      # fresh DB — Doctrine processes namespace by namespace. The robust
+      # fresh DB - Doctrine processes namespace by namespace. The robust
       # path for fresh dev/CI databases is `schema:create` from the entity
       # metadata then mark every migration as already-applied. Future
       # migrations (single namespace addition at a time) then run normally
@@ -194,7 +194,7 @@ jobs:
       - name: Validate schema is in sync with entity mappings
         run: php bin/console doctrine:schema:validate --env=test
 
-      # —— Tests 🧪 —————————————————————————————————————————————————————————————
+      # -- Tests 🧪 -------------------------------------------------------------
       - name: Run frontend tests
         run: make test-frontend
 

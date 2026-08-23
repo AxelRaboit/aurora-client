@@ -8,12 +8,12 @@ use Aurora\Module\Ged\DocumentCategory\Dto\DocumentCategoryInput as AuroraDocume
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Layer 2 of the client extension — reference example.
+ * Layer 2 of the client extension - reference example.
  *
  * Extends Aurora's input rather than replacing it, so the constraints
  * declared upstream on `name` keep applying. Note the class is not
  * `readonly class`: Aurora's isn't either, precisely so a client can add a
- * property here — a `readonly class` parent would forbid it.
+ * property here - a `readonly class` parent would forbid it.
  */
 class DocumentCategoryInput extends AuroraDocumentCategoryInput
 {

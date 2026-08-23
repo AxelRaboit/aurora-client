@@ -1,4 +1,4 @@
-# The module's own catalogue, co-located with it — aurora discovers
+# The module's own catalogue, co-located with it - aurora discovers
 # src/Module/<X>/translations/ for client modules as it does for its own.
 #
 # The toggle and nav keys are read by the core (sidemenu, module-access
@@ -9,8 +9,8 @@ backend:
     tracking_dashboard: Tracking
   modules:
     tracking: Tracking
-    tracking_description: Project-specific tracking screen — example of a self-contained client module.
+    tracking_description: Project-specific tracking screen - example of a self-contained client module.
   tracking:
     title: Tracking
     subtitle: A self-contained client module, added without changing anything in aurora-core.
-    placeholder: This screen exists only to demonstrate the full wiring of a client module — module, context, controller, view, translations and toggle.
+    placeholder: This screen exists only to demonstrate the full wiring of a client module - module, context, controller, view, translations and toggle.

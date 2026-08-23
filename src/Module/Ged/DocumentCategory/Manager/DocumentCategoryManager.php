@@ -14,7 +14,7 @@ use Override;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
- * Layer 3 of the client extension — reference example.
+ * Layer 3 of the client extension - reference example.
  *
  * Three overrides, and each one exists for a reason worth knowing:
  *

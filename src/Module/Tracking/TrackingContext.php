@@ -7,7 +7,7 @@ namespace App\Module\Tracking;
 use Aurora\Core\Module\Service\ModuleAccessChecker;
 
 /**
- * Reads the module's own toggle — reference example.
+ * Reads the module's own toggle - reference example.
  *
  * Goes through `ModuleAccessChecker`, never `SettingRepository::getBoolean()`.
  * The checker answers the question that actually matters: enabled globally

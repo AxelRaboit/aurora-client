@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
- * Backend screen of the client module — reference example.
+ * Backend screen of the client module - reference example.
  *
  * Two gates, deliberately, because they answer different questions:
  *
@@ -20,11 +20,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  *   makes a bookmarked URL refuse a user the sidemenu already hid.
  * - The context check asks whether the module is switched on at all. A user
  *   can hold `tracking.dashboard.view` on an installation where tracking is
- *   off, and a 404 is the honest answer there — the screen does not exist,
+ *   off, and a 404 is the honest answer there - the screen does not exist,
  *   rather than existing and being forbidden.
  *
  * The template is co-located under `src/Module/Tracking/templates/` and
- * reached through the `@Tracking` namespace — aurora derives it from the
+ * reached through the `@Tracking` namespace - aurora derives it from the
  * module's directory name, for modules the client owns as well as its own.
  */
 #[Route('/backend/tracking', name: 'backend_tracking_dashboard')]

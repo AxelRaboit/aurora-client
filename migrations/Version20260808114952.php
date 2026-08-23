@@ -14,7 +14,7 @@ use Doctrine\Migrations\AbstractMigration;
  * The generated diff created the new table and repointed the foreign key, and
  * stopped there. On any project that already has categories that is a broken
  * migration: `core_ged_documents` still holds the old ids, so adding the
- * constraint against an empty table fails outright — and if it did not, every
+ * constraint against an empty table fails outright - and if it did not, every
  * categorised document would be orphaned.
  *
  * The copy below is the missing half. Ids are carried over deliberately so the
@@ -35,7 +35,7 @@ final class Version20260808114952 extends AbstractMigration
         $this->addSql('CREATE UNIQUE INDEX UNIQ_C58E05FB989D9B62 ON app_document_categories (slug)');
 
         // Carry the existing rows across, ids included, before anything points
-        // at the new table. `color` starts null — no old row can have one.
+        // at the new table. `color` starts null - no old row can have one.
         $this->addSql(<<<'SQL'
             INSERT INTO app_document_categories (id, name, slug, description, created_at, updated_at, color)
             SELECT id, name, slug, description, created_at, updated_at, NULL
@@ -56,7 +56,7 @@ final class Version20260808114952 extends AbstractMigration
     {
         // Same care in reverse: put the rows back before the constraint that
         // needs them, otherwise rolling back orphans every categorised
-        // document. `color` is dropped — Aurora's table has no such column.
+        // document. `color` is dropped - Aurora's table has no such column.
         $this->addSql(<<<'SQL'
             INSERT INTO core_ged_document_categories (id, name, slug, description, created_at, updated_at)
             SELECT id, name, slug, description, created_at, updated_at

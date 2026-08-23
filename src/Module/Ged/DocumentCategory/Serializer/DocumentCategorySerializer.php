@@ -12,12 +12,12 @@ use Override;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
- * Layer 4 of the client extension — reference example.
+ * Layer 4 of the client extension - reference example.
  *
  * Spread-merges rather than rebuilding the payload: every field Aurora adds
  * upstream keeps flowing to the front without this file changing.
  *
- * The `instanceof` guard is not ceremony — the interface Aurora hands us
+ * The `instanceof` guard is not ceremony - the interface Aurora hands us
  * knows nothing about `getColor()`, and a project can still hold rows
  * created before the extension existed.
  */

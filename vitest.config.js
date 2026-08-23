@@ -21,13 +21,13 @@ export default defineConfig({
     test: {
         environment: "jsdom",
         globals: true,
-        // Client JS lives under src/ since 0.5 — there is no `assets/client/`.
+        // Client JS lives under src/ since 0.5 - there is no `assets/client/`.
         // Tests sit next to the code they cover, per aurora's co-location
         // convention for Vue/JS.
         include: ["src/**/*.{test,spec}.{js,ts}"],
         exclude: ["node_modules", "vendor"],
         // A client project legitimately starts with no frontend tests. Kept so
-        // `make test-frontend` is green on an empty project — but note this
+        // `make test-frontend` is green on an empty project - but note this
         // previously hid a dead `include` path, so if you expect tests to run
         // and see none, check the glob above before trusting the green.
         passWithNoTests: true,

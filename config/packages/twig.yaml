@@ -1,7 +1,7 @@
 twig:
     # Client module template namespaces. AuroraBundle::prependExtension
     # auto-prepends <client>/src/Module/<X>/templates/ for module overrides
-    # of @Core / @Shared too — manual entries below are only required for
+    # of @Core / @Shared too - manual entries below are only required for
     # client modules aurora-core doesn't know about, e.g.:
     #   paths:
     #       '%kernel.project_dir%/src/Module/<X>/templates': '<X>'

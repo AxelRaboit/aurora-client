@@ -10,7 +10,7 @@ use Aurora\Module\Ged\DocumentCategory\Repository\DocumentCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Layer 1 of the client extension — reference example.
+ * Layer 1 of the client extension - reference example.
  *
  * Adds a `color` field to Aurora's document categories without touching
  * vendor/. Extending `AbstractDocumentCategory` rather than the concrete

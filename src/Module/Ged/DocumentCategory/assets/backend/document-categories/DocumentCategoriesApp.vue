@@ -1,12 +1,12 @@
 <script setup>
 /**
- * Layer 5 of the client extension — reference example.
+ * Layer 5 of the client extension - reference example.
  *
  * Aurora's component is not touched. This wrapper sits at
  * `src/Module/Ged/DocumentCategory/assets/backend/document-categories/`, which
  * the app.js glob flattens to the same key Aurora publishes
  * (`ged/backend/document-categories/DocumentCategoriesApp`). Client modules are
- * spread after Aurora's, so this one wins — no Twig override to write.
+ * spread after Aurora's, so this one wins - no Twig override to write.
  *
  * `extraFields` declares the field; the composable merges it into both forms
  * and submits it, because the request body is the whole form object. The three
@@ -37,7 +37,7 @@ const extraFields = {
                     <span class="w-4 h-4 rounded border border-line" :style="{ backgroundColor: category.color }" />
                     <span class="font-mono text-xs text-muted">{{ category.color }}</span>
                 </span>
-                <span v-else class="text-muted">—</span>
+                <span v-else class="text-muted">-</span>
             </td>
         </template>
 

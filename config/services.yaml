@@ -8,7 +8,7 @@ services:
         autoconfigure: true
 
     # Mirror aurora-core's `_instanceof` autoconfig. `_instanceof` scopes to the
-    # current YAML file only — it does NOT inherit across bundle service configs.
+    # current YAML file only - it does NOT inherit across bundle service configs.
     # Without this block, client modules implementing aurora-core marker
     # interfaces would never be picked up by the corresponding registries.
     _instanceof:

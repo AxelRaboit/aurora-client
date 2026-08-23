@@ -39,15 +39,15 @@ use function assert;
  * Demo content for a guest house: a "Chambre" post type, the taxonomies that
  * describe a room, and half a dozen rooms to fill the site.
  *
- * There was a `bnb` theme beside this — four templates and a Theme row this
- * fixture activated — and it is gone. What is left renders with the default
+ * There was a `bnb` theme beside this - four templates and a Theme row this
+ * fixture activated - and it is gone. What is left renders with the default
  * theme, which is the point the demo was always making: a room is the post
  * type's custom fields, reachable from the backend without writing PHP, and
  * nothing about it needed a theme of its own.
  *
  * Configures the whole site, not just the rooms: pages, homepage and the two
  * public menus. Aurora has one menu per location, so the blog demo and this one
- * cannot honestly coexist — they are alternative configurations of the same
+ * cannot honestly coexist - they are alternative configurations of the same
  * site, and loading this one turns the site into a guest house. The blog demo
  * is a `doctrine:fixtures:load --group=demo` away if you want it back.
  *
@@ -88,7 +88,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
         // Choices are plain strings, not `{value, label}` pairs. The rebuilt
         // post-type screen edits them one per line and the post editor reads
         // them as-is, so a pair would render as `[object Object]` in the
-        // dropdown — and the stored value would be an array. It also means the
+        // dropdown - and the stored value would be an array. It also means the
         // value a room carries *is* the words an editor typed: rewording a
         // choice does not silently orphan the rooms already using it, it
         // renames what they say.
@@ -144,8 +144,8 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
         ],
         [
             'slug' => 'suite-amandier',
-            'fr' => ['title' => "Suite de l'Amandier", 'teaser' => 'En rénovation jusqu\'au printemps — réouverture prévue en avril.', 'meta' => "Suite en rénovation jusqu'au printemps, réouverture prévue en avril au Mas des Oliviers."],
-            'en' => ['title' => 'Almond Tree Suite', 'teaser' => 'Under renovation until spring — reopening in April.', 'meta' => 'Suite under renovation until spring, reopening in April at Le Mas des Oliviers.'],
+            'fr' => ['title' => "Suite de l'Amandier", 'teaser' => 'En rénovation jusqu\'au printemps - réouverture prévue en avril.', 'meta' => "Suite en rénovation jusqu'au printemps, réouverture prévue en avril au Mas des Oliviers."],
+            'en' => ['title' => 'Almond Tree Suite', 'teaser' => 'Under renovation until spring - reopening in April.', 'meta' => 'Suite under renovation until spring, reopening in April at Le Mas des Oliviers.'],
             // Deliberately unavailable: the theme has to show what an
             // unbookable room looks like, and a demo where everything is
             // perfect never exercises that path.
@@ -156,7 +156,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
     ];
 
     /**
-     * The pages a guest house needs beyond its rooms. Kept short on purpose —
+     * The pages a guest house needs beyond its rooms. Kept short on purpose -
      * the demo is about showing a real site shape, not writing a brochure.
      *
      * @var list<array{slug: string, fr: array{title: string, heading: string, body: string, meta: string}, en: array{title: string, heading: string, body: string, meta: string}}>
@@ -197,13 +197,13 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
             'fr' => [
                 'title' => 'Les salons',
                 'heading' => 'Deux salons, une cheminée, aucune télévision',
-                'meta' => "Deux salons à disposition des hôtes : cheminée d'origine, bibliothèque, terrasse — et aucune télévision.",
+                'meta' => "Deux salons à disposition des hôtes : cheminée d'origine, bibliothèque, terrasse - et aucune télévision.",
                 'body' => "Le grand salon ouvre sur la terrasse et sert de salle de petit-déjeuner les matins de pluie. Le petit salon, à l'étage, garde sa cheminée d'origine et une bibliothèque que nos hôtes alimentent depuis six ans.",
             ],
             'en' => [
                 'title' => 'The living rooms',
                 'heading' => 'Two sitting rooms, one fireplace, no television',
-                'meta' => 'Two sitting rooms for guests: original fireplace, library, terrace — and no television.',
+                'meta' => 'Two sitting rooms for guests: original fireplace, library, terrace - and no television.',
                 'body' => 'The main room opens onto the terrace and doubles as the breakfast room on rainy mornings. The upstairs room keeps its original fireplace and a library our guests have been feeding for six years.',
             ],
         ],
@@ -219,7 +219,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
                 'title' => 'The grounds',
                 'heading' => 'An acre of garden, a pool, and shade everywhere',
                 'meta' => 'An acre of garden, a pool heated from April to October, a kitchen garden and shade under the plane trees.',
-                'body' => 'The pool is heated from April to October and never crowded — six rooms rarely means more than ten people. The kitchen garden feeds the table in summer, and the loungers under the plane trees are the best spot in the house at five in the afternoon.',
+                'body' => 'The pool is heated from April to October and never crowded - six rooms rarely means more than ten people. The kitchen garden feeds the table in summer, and the loungers under the plane trees are the best spot in the house at five in the afternoon.',
             ],
         ],
         [
@@ -248,8 +248,8 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
             'en' => [
                 'title' => 'Contact & booking',
                 'heading' => 'Book, or ask us anything',
-                'meta' => 'Check our availability — we answer within 24 hours. Pick-up from the station on request.',
-                'body' => 'Write to us to check availability — we answer within 24 hours. The house is 20 minutes from the station, and we can arrange a pick-up.',
+                'meta' => 'Check our availability - we answer within 24 hours. Pick-up from the station on request.',
+                'body' => 'Write to us to check availability - we answer within 24 hours. The house is 20 minutes from the station, and we can arrange a pick-up.',
             ],
         ],
     ];
@@ -257,7 +257,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
     public function __construct(
         private readonly PostTextExtractor $textExtractor,
         // Image URLs are date-based (ged/2026/08/…), so they are resolved from
-        // the documents at load time rather than written into the content —
+        // the documents at load time rather than written into the content -
         // hardcoding them breaks the moment the media fixtures run in another
         // month.
         private readonly DocumentUrlGenerator $documentUrls,
@@ -272,7 +272,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
      *
      * Throws rather than answering null. A missing image here means the Ged
      * demo has not run, and the only symptom of returning null was a page
-     * quietly missing half its content — the failure mode this demo exists to
+     * quietly missing half its content - the failure mode this demo exists to
      * make visible, not to reproduce.
      */
     private function imageUrl(EntityManagerInterface $manager, string $originalName): string
@@ -282,7 +282,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
         );
 
         if (null === $url) {
-            throw new RuntimeException(sprintf('The demo image "%s" is missing — load the Ged demo fixtures first.', $originalName));
+            throw new RuntimeException(sprintf('The demo image "%s" is missing - load the Ged demo fixtures first.', $originalName));
         }
 
         return $url;
@@ -298,7 +298,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
 
     /**
      * The images come from the Ged demo, and without this Doctrine was free to
-     * run us first — alphabetically, `App\…` beats `Aurora\…`, so it always
+     * run us first - alphabetically, `App\…` beats `Aurora\…`, so it always
      * did. `imageUrl()` then found nothing, and the two richest blocks on the
      * "La maison" page (the landscape photo and the owners' media-text) were
      * dropped without a word. The page still rendered, which is why it went
@@ -432,7 +432,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
 
             // A body is a content grid of one full-width text zone. The plain
             // `blocks` column it used to be is gone from aurora-core, migrated
-            // into exactly this shape — and a fixture reloads a fresh database,
+            // into exactly this shape - and a fixture reloads a fresh database,
             // where that migration has already run and will not run again.
             $page->setGridLayout($this->gridNormalizer->normalizeLayout([
                 'enabled' => true,
@@ -451,7 +451,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
                 // characters a snippet shows; 'body' is the summary a reader
                 // sees, under the title and on the card. They used to be the
                 // same string, which produced 247-character "meta descriptions"
-                // — prose that Google would simply cut in half.
+                // - prose that Google would simply cut in half.
                 $translation = new PostTranslation()
                     ->setPost($page)
                     ->setLocale($locale)
@@ -479,8 +479,8 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
     /**
      * Composes a page's blocks.
      *
-     * "La maison" gets the full treatment — images, a pull quote, a list, a
-     * callout — because a demo that is one heading and one paragraph shows
+     * "La maison" gets the full treatment - images, a pull quote, a list, a
+     * callout - because a demo that is one heading and one paragraph shows
      * nothing about what the editor can do. The other pages stay short: a
      * contact page padded with filler would look like filler.
      *
@@ -522,7 +522,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
         // the renderer.
         $blocks[] = EditorBlocks::list($isFrench
             ? ['Draps en lin lavé et linge de toilette fournis', 'Petit-déjeuner maison servi de 8h à 10h30', 'Piscine chauffée ouverte d\'avril à octobre', 'Parking clos dans la cour', 'Wi-Fi fibre dans toute la maison']
-            : ['Washed linen sheets and towels provided', 'Home-made breakfast served 8:00–10:30', 'Heated pool open April to October', 'Enclosed parking in the courtyard', 'Fibre Wi-Fi throughout the house']);
+            : ['Washed linen sheets and towels provided', 'Home-made breakfast served 8:00-10:30', 'Heated pool open April to October', 'Enclosed parking in the courtyard', 'Fibre Wi-Fi throughout the house']);
 
         $blocks[] = ['type' => 'mediaText', 'data' => [
             'image' => ['url' => $portrait],
@@ -595,7 +595,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
     /**
      * Rebuilds the public menus for a guest house.
      *
-     * Existing entries are cleared first — one menu per location means the blog
+     * Existing entries are cleared first - one menu per location means the blog
      * demo's navigation would otherwise sit alongside ours. The `account` menu
      * is left alone: its entries are protected by Aurora and belong to the
      * platform rather than to either demo.
@@ -605,7 +605,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
     private function menus(EntityManagerInterface $manager, PostType $roomType, array $pages): void
     {
         // "La maison" carries the two room-less spaces as children, which keeps
-        // the top level to five entries and exercises Aurora's dropdown — a flat
+        // the top level to five entries and exercises Aurora's dropdown - a flat
         // list of seven would demo neither.
         $entries = [
             'primary' => [
@@ -655,8 +655,8 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
     /**
      * Creates one entry, optionally nested under a parent.
      *
-     * Returns null for an entry whose target could not be resolved — a page the
-     * fixture failed to create — rather than persisting one that points nowhere
+     * Returns null for an entry whose target could not be resolved - a page the
+     * fixture failed to create - rather than persisting one that points nowhere
      * and gets dropped from the site anyway.
      *
      * @param array{type: MenuItemTargetTypeEnum, target?: int|null, fr: string, en: string} $config
@@ -736,7 +736,7 @@ class BnbFixtures extends Fixture implements DependentFixtureInterface, FixtureG
                 ->setSlug($room['slug'])
                 ->setDescription($room[$locale]['teaser'])
                 ->setMetaDescription($room[$locale]['meta'])
-                // Values live on the translation, keyed by field name — the
+                // Values live on the translation, keyed by field name - the
                 // shape PostTypeField declares. Non-translatable fields are
                 // written to both locales so a reader in either language sees
                 // the same price.
