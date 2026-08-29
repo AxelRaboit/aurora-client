@@ -28,6 +28,9 @@
             "@general/*": [
                 "./vendor/axelraboit/aurora/src/Module/General/assets/*"
             ],
+            "@notes/*": [
+                "./vendor/axelraboit/aurora/src/Module/Notes/assets/*"
+            ],
             "@planning/*": [
                 "./vendor/axelraboit/aurora/src/Module/Planning/assets/*"
             ],
