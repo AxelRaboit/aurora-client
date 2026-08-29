@@ -3,12 +3,12 @@
     "description": "Aurora-based client application - à-la-carte modules over VCS (no Packagist).",
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
         "php": ">=8.4",
         "symfony/runtime": "7.4.*",
-        "axelraboit/aurora": "dev-develop"
+        "axelraboit/aurora": "^0.6"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.3.1",
