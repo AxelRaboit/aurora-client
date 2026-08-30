@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "axelraboit/aurora",
-            "version": "v0.9.2",
+            "version": "v0.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-core.git",
-                "reference": "c16cb6f2a5ee9e4f90d357654e1a45a2d8a58e33"
+                "reference": "15840d9e77c7e5b6d7403aa7770e8462bdb19172"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/c16cb6f2a5ee9e4f90d357654e1a45a2d8a58e33",
-                "reference": "c16cb6f2a5ee9e4f90d357654e1a45a2d8a58e33",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/15840d9e77c7e5b6d7403aa7770e8462bdb19172",
+                "reference": "15840d9e77c7e5b6d7403aa7770e8462bdb19172",
                 "shasum": ""
             },
             "require": {
@@ -93,7 +93,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Aurora\\": "src/"
+                    "Aurora\\": "src/",
+                    "Aurora\\Fixtures\\": "fixtures/"
                 }
             },
             "autoload-dev": {
@@ -124,10 +125,10 @@
             ],
             "description": "Aurora application",
             "support": {
-                "source": "https://github.com/AxelRaboit/aurora-core/tree/v0.9.2",
+                "source": "https://github.com/AxelRaboit/aurora-core/tree/v0.9.3",
                 "issues": "https://github.com/AxelRaboit/aurora-core/issues"
             },
-            "time": "2026-08-30T11:23:36+00:00"
+            "time": "2026-08-30T11:50:31+00:00"
         },
         {
             "name": "brick/math",
