@@ -4,3 +4,19 @@ framework:
             policy: sliding_window
             limit: 10
             interval: '1 hour'
+
+        # Les deux chemins d'écriture qu'un inconnu tenant un lien de contrat
+        # peut atteindre. Le contrôleur public d'aurora-core les câble par nom :
+        # sans ces deux entrées, le conteneur ne se construit pas.
+        #
+        # Les deux sont calées sur l'IP, qui est à l'attaquant de faire tourner.
+        # C'est donc le mur extérieur, pas le seul : le code porte sa propre
+        # limite de tentatives et son plafond par lien.
+        contract_signature:
+            policy: sliding_window
+            limit: 10
+            interval: '1 hour'
+        contract_signature_code:
+            policy: sliding_window
+            limit: 15
+            interval: '1 hour'
