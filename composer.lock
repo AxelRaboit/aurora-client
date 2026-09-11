@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "axelraboit/aurora",
-            "version": "v0.9.119",
+            "version": "v0.9.120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-core.git",
-                "reference": "702991fa9abee01ca64da6736f10a02f4f55ddef"
+                "reference": "656f478e1b6d53e0e5dd1bf9bb0926542b221bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/702991fa9abee01ca64da6736f10a02f4f55ddef",
-                "reference": "702991fa9abee01ca64da6736f10a02f4f55ddef",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/656f478e1b6d53e0e5dd1bf9bb0926542b221bf8",
+                "reference": "656f478e1b6d53e0e5dd1bf9bb0926542b221bf8",
                 "shasum": ""
             },
             "require": {
@@ -126,10 +126,10 @@
             ],
             "description": "Aurora application",
             "support": {
-                "source": "https://github.com/AxelRaboit/aurora-core/tree/v0.9.119",
+                "source": "https://github.com/AxelRaboit/aurora-core/tree/v0.9.120",
                 "issues": "https://github.com/AxelRaboit/aurora-core/issues"
             },
-            "time": "2026-09-11T10:55:24+00:00"
+            "time": "2026-09-11T13:56:59+00:00"
         },
         {
             "name": "brick/math",
