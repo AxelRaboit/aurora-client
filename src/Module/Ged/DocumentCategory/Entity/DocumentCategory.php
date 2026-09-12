@@ -25,6 +25,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Entity(repositoryClass: DocumentCategoryRepository::class)]
 #[ORM\Table(name: 'app_document_categories')]
+// Same partial uniqueness as the bundle's own table: a category waiting in the
+// trash keeps its slug without holding the name hostage. Declared here because
+// the substitution moved the table, and the bundle's constraint went with it.
+#[ORM\UniqueConstraint(name: 'uniq_app_category_slug_live', columns: ['slug'], options: ['where' => '(deleted_at IS NULL)'])]
 class DocumentCategory extends AbstractDocumentCategory
 {
     #[ORM\Id]
