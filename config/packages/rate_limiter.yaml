@@ -20,3 +20,15 @@ framework:
             policy: sliding_window
             limit: 15
             interval: '1 hour'
+
+        # Le mot de passe d'un lien de partage de présentation, câblé par nom
+        # par le contrôleur public d'aurora-core depuis la 0.9.166 : sans cette
+        # entrée, le conteneur ne se construit pas.
+        #
+        # Calée sur l'IP comme les deux précédentes, avec la même réserve. Le
+        # mur intérieur, ici, est qu'un mot de passe faux répond exactement ce
+        # que répond une adresse fausse.
+        deck_share_password:
+            policy: sliding_window
+            limit: 20
+            interval: '1 hour'
