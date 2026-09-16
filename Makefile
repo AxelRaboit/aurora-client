@@ -417,25 +417,6 @@ fix: ## Run all fixers + stan
 fd: ## Fix code and build dev assets
 	make fix && make dev
 
-audit: ## Report every security advisory, then fail on high or critical ones
-	@# Deliberately absent from `ft`. An advisory published upstream would turn
-	@# the local gate red on a morning nobody touched the code, which teaches
-	@# people to push past it. The CI runs the same commands on every push.
-	@#
-	@# Les deux arbres JS, parce que les deux sont livres : celui du vendor
-	@# porte l'outillage de build, celui-ci les paquets du navigateur.
-	@echo "── PHP ──"
-	@composer audit --locked || true
-	@echo "── JS (vendor aurora) ──"
-	@(cd $(AURORA) && pnpm audit) || true
-	@echo "── JS (client) ──"
-	@pnpm audit || true
-	@echo "── verdict (high et critical seulement) ──"
-	composer audit --locked --ignore-severity=low --ignore-severity=medium
-	(cd $(AURORA) && pnpm audit --audit-level high)
-	pnpm audit --audit-level high
-	@echo "✅ aucun avis haut ou critique"
-
 ft: ## Fix code and run all tests
 	make fix && make test && make migrate-check
 
