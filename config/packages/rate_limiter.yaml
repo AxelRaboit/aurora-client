@@ -32,3 +32,26 @@ framework:
             policy: sliding_window
             limit: 20
             interval: '1 hour'
+
+        # L'écriture qu'un client tenant un lien d'espace peut atteindre. Le
+        # contrôleur public d'aurora-core la câble par nom : sans cette entrée,
+        # le conteneur ne se construit pas.
+        #
+        # Calée sur l'IP, donc mur extérieur comme les précédentes. Le mur
+        # intérieur est que le lien porte ses propres droits, et qu'un lien
+        # révoqué ou expiré ne mène nulle part.
+        space_guest_write:
+            policy: sliding_window
+            limit: 40
+            interval: '1 hour'
+
+        # Le dépôt de fichier d'un client tenant un lien d'espace. Le
+        # contrôleur public d'aurora-core le câble par nom : sans cette
+        # entrée, le conteneur ne se construit pas.
+        #
+        # Séparé de `space_guest_write` parce qu'un fichier ne coûte pas ce
+        # que coûte un avis.
+        space_guest_upload:
+            policy: sliding_window
+            limit: 20
+            interval: '1 hour'
