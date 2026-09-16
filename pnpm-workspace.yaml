@@ -1,0 +1,11 @@
+# Les versions que pnpm 11 doit imposer a l'arbre, quoi qu'en disent les
+# paquets intermediaires. Ce reglage vivait dans `package.json` sous la cle
+# `pnpm`, que pnpm 11 ne lit plus.
+#
+# Toute cette chaine est de l'outillage de test : vitest tire vite, qui tire
+# postcss, qui tire nanoid, et trois avis de securite visent les versions
+# epinglees. Rien dans l'arbre n'en propose de plus recentes de lui-meme.
+overrides:
+  vite: '>=8.0.16'
+  postcss: '>=8.5.23'
+  nanoid: '>=3.3.18'
