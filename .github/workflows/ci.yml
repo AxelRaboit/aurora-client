@@ -84,8 +84,23 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --no-ansi --no-interaction --prefer-dist --no-scripts
 
-      - name: Check if any dependencies are compromised
-        run: composer audit || true
+      # -- Avis de securite 🔒 -------------------------------------------------
+      # Deux etapes, et la premiere n'echoue jamais : elle imprime tout, pour
+      # que les avis moderes et bas restent visibles dans le journal. La
+      # seconde tranche.
+      #
+      # Jusqu'au 16/09/2026 il n'y avait que la premiere, avec `|| true` : elle
+      # tournait et son resultat partait a la poubelle. Cote JS il n'y avait
+      # rien du tout, et c'est la que se trouvaient six des avis ouverts.
+      #
+      # Le seuil est `high`. Un avis bas ou modere publie en amont ferait
+      # rougir un build un matin ou personne n'a touche au code, ce qui apprend
+      # a ignorer la couleur.
+      - name: Report every advisory (never fails)
+        run: composer audit --locked || true
+
+      - name: Fail on high or critical advisories
+        run: composer audit --locked --ignore-severity=low --ignore-severity=medium
 
       # aurora-core ships its own composer.json and bundles its dev tools
       # under its own vendor/. Composer's --no-scripts above only installed
@@ -139,6 +154,18 @@ jobs:
 
       - name: Install JS dependencies (client)
         run: pnpm install --frozen-lockfile
+
+      # Les deux arbres, parce que les deux sont livres : celui du vendor porte
+      # l'outillage de build, celui du client les paquets du navigateur.
+      - name: Report every JS advisory (never fails)
+        run: |
+          (cd vendor/axelraboit/aurora && pnpm audit) || true
+          pnpm audit || true
+
+      - name: Fail on high or critical JS advisories
+        run: |
+          (cd vendor/axelraboit/aurora && pnpm audit --audit-level high)
+          pnpm audit --audit-level high
 
       - name: Build assets
         run: make build
