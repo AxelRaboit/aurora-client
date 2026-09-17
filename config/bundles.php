@@ -19,4 +19,9 @@ return [
     Symfony\UX\Vue\VueBundle::class => ['all' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
+    // Le hub temps réel des discussions d'espace client. Il arrive en
+    // dépendance transitive d'aurora-core et Flex ne l'inscrit pas tout seul
+    // chez un consommateur, donc il s'enregistre ici. Sans hub configuré il ne
+    // fait rien : les messages restent stockés et postés en HTTP ordinaire.
+    Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
 ];
