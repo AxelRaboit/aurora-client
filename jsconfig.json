@@ -39,6 +39,9 @@
             ],
             "@platform/*": [
                 "./vendor/axelraboit/aurora/src/Module/Platform/assets/*"
+            ],
+            "@studio/*": [
+                "./vendor/axelraboit/aurora/src/Module/Studio/assets/*"
             ]
         }
     },
