@@ -13,6 +13,9 @@
             "@client/*": [
                 "./*"
             ],
+            "@beacon/*": [
+                "./vendor/axelraboit/aurora/src/Module/Beacon/assets/*"
+            ],
             "@configuration/*": [
                 "./vendor/axelraboit/aurora/src/Module/Configuration/assets/*"
             ],
