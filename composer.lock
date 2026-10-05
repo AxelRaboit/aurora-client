@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0da0e78f6a0ac278d51cef34bc089535",
+    "content-hash": "94fc33bcaec64a758b104597417adca1",
     "packages": [
         {
             "name": "async-aws/core",
@@ -206,16 +206,16 @@
         },
         {
             "name": "axelraboit/aurora",
-            "version": "v1.17.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-core.git",
-                "reference": "26358fb9577ad80a12dfff3c446b37756ffa71f5"
+                "reference": "6ad455bb36606b304928115f8b8e64c1aaa268e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/26358fb9577ad80a12dfff3c446b37756ffa71f5",
-                "reference": "26358fb9577ad80a12dfff3c446b37756ffa71f5",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/6ad455bb36606b304928115f8b8e64c1aaa268e7",
+                "reference": "6ad455bb36606b304928115f8b8e64c1aaa268e7",
                 "shasum": ""
             },
             "require": {
@@ -326,10 +326,10 @@
             ],
             "description": "Aurora application",
             "support": {
-                "source": "https://github.com/AxelRaboit/aurora-core/tree/v1.17.1",
+                "source": "https://github.com/AxelRaboit/aurora-core/tree/v2.0.0",
                 "issues": "https://github.com/AxelRaboit/aurora-core/issues"
             },
-            "time": "2026-10-05T19:13:19+00:00"
+            "time": "2026-10-05T22:06:35+00:00"
         },
         {
             "name": "brick/math",
