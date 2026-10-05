@@ -3,9 +3,9 @@
  * Layer 5 of the client extension - reference example.
  *
  * Aurora's component is not touched. This wrapper sits at
- * `src/Module/Ged/DocumentCategory/assets/backend/document-categories/`, which
+ * `src/Module/Ged/DocumentCategory/assets/suite/document-categories/`, which
  * the app.js glob flattens to the same key Aurora publishes
- * (`ged/backend/document-categories/DocumentCategoriesApp`). Client modules are
+ * (`ged/suite/document-categories/DocumentCategoriesApp`). Client modules are
  * spread after Aurora's, so this one wins - no Twig override to write.
  *
  * `extraFields` declares the field; the composable merges it into both forms
@@ -13,7 +13,7 @@
  * scoped slots place it in the table and in the two modals.
  */
 import AppColorField from "@shared/components/form/picker/AppColorField.vue";
-import AuroraDocumentCategoriesApp from "@ged/backend/document-categories/DocumentCategoriesApp.vue";
+import AuroraDocumentCategoriesApp from "@ged/suite/document-categories/DocumentCategoriesApp.vue";
 
 const extraFields = {
     color: {
