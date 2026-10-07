@@ -30,7 +30,7 @@ services:
 
     Aurora\Module\Configuration\Setting\Command\DumpJsTranslationsCommand:
         arguments:
-            $auroraDir: '%kernel.project_dir%/vendor/axelraboit/aurora'
+            $auroraDirectory: '%kernel.project_dir%/vendor/axelraboit/aurora'
             # Add client module translation dirs here so their JS translations
             # get dumped, e.g. '%kernel.project_dir%/src/Module/<X>/translations'
-            $extraSourceDirs: []
+            $extraSourceDirectories: []
