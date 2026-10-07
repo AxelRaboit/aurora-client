@@ -9,3 +9,8 @@ overrides:
   vite: '>=8.0.16'
   postcss: '>=8.5.23'
   nanoid: '>=3.3.18'
+  # GHSA-68fv-2mgg-jv7q: source-map-js < 1.2.2 lets indexed source-map section
+  # offsets block the event loop. Pulled in by vue and its compilers, which do
+  # not ask for the fixed version yet. Same pin as aurora-core; remove once
+  # they do.
+  source-map-js: '>=1.2.2'
