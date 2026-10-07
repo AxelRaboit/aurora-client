@@ -7,7 +7,7 @@ Projet client construit sur [Aurora](https://github.com/AxelRaboit/aurora-core)
 
 ## Ce que fait ce projet
 
-Un site public et son back-office, construits sur Aurora : publications et
+Un site public et sa suite d'administration (`/suite`), construits sur Aurora : publications et
 pages composées en grille, médiathèque, formulaires, et selon les modules
 activés, le Studio (clients, contrats signés en ligne, espaces clients), les
 notes et les calendriers. Le tout en français, anglais et espagnol.
