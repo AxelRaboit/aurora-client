@@ -36,7 +36,9 @@ jobs:
       DATABASE_URL: postgresql://app:!ChangeMe!@127.0.0.1:5432/aurora_client?serverVersion=18&charset=utf8
     services:
       postgres:
-        image: postgres:18-alpine
+        # The official image, from Amazon's public mirror rather than Docker
+        # Hub, which caps anonymous pulls per address (09/10/2026).
+        image: public.ecr.aws/docker/library/postgres:18-alpine
         env:
           POSTGRES_USER: app
           POSTGRES_PASSWORD: "!ChangeMe!"
