@@ -206,16 +206,16 @@
         },
         {
             "name": "axelraboit/aurora",
-            "version": "v4.10.0",
+            "version": "v4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxelRaboit/aurora-core.git",
-                "reference": "f4715c6be8374e3e80d34845292fa5db5a9ea436"
+                "reference": "9b54d61ba104317ae650ac6a8ea2d34e5ecf402f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/f4715c6be8374e3e80d34845292fa5db5a9ea436",
-                "reference": "f4715c6be8374e3e80d34845292fa5db5a9ea436",
+                "url": "https://api.github.com/repos/AxelRaboit/aurora-core/zipball/9b54d61ba104317ae650ac6a8ea2d34e5ecf402f",
+                "reference": "9b54d61ba104317ae650ac6a8ea2d34e5ecf402f",
                 "shasum": ""
             },
             "require": {
@@ -235,6 +235,7 @@
                 "simshaun/recurr": "^6.0",
                 "symfony/asset": "7.4.*",
                 "symfony/console": "7.4.*",
+                "symfony/dependency-injection": "~7.4.16",
                 "symfony/doctrine-messenger": "7.4.*",
                 "symfony/dotenv": "7.4.*",
                 "symfony/flex": "^2.10",
@@ -326,10 +327,10 @@
             ],
             "description": "Aurora application",
             "support": {
-                "source": "https://github.com/AxelRaboit/aurora-core/tree/v4.10.0",
+                "source": "https://github.com/AxelRaboit/aurora-core/tree/v4.12.0",
                 "issues": "https://github.com/AxelRaboit/aurora-core/issues"
             },
-            "time": "2026-10-10T18:36:44+00:00"
+            "time": "2026-10-10T21:42:58+00:00"
         },
         {
             "name": "brick/math",
